@@ -219,8 +219,26 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 .media-card-date{font-family:var(--font-mono);font-size:11px;color:var(--gray-dark)}
 .media-empty{padding:60px;text-align:center;font-family:var(--font-mono);font-size:13px;color:var(--gray-dark)}
 
+/* ARTICOLO */
+.articolo-wrap{max-width:720px;margin:0 auto;padding:60px 60px 80px}
+.articolo-back{font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:var(--gray-dark);margin-bottom:40px;border:none;background:none;padding:0}
+.articolo-back:hover{color:var(--black)}
+.articolo-tipo{font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:16px}
+.articolo-title{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:20px}
+.articolo-meta{display:flex;align-items:center;gap:20px;padding:16px 0;border-top:var(--border);border-bottom:var(--border);margin-bottom:40px;font-family:var(--font-mono);font-size:12px;color:var(--gray-dark)}
+.articolo-body{font-size:17px;line-height:1.8;color:#222}
+.articolo-body h2{font-family:var(--font-display);font-size:26px;font-weight:700;margin:48px 0 16px;letter-spacing:-0.01em}
+.articolo-body h3{font-family:var(--font-display);font-size:20px;font-weight:700;margin:32px 0 12px}
+.articolo-body p{margin-bottom:20px}
+.articolo-body blockquote{border-left:3px solid var(--yellow);padding:16px 24px;margin:32px 0;font-style:italic;color:#555;background:var(--gray-light)}
+.articolo-body .stat-inline{display:inline-block;font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--black)}
+.articolo-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:var(--border)}
 @media(max-width:768px){
-  nav{padding:0 12px;height:54px}
+  .articolo-wrap{padding:40px 20px 60px}
+  .articolo-title{font-size:clamp(28px,9vw,44px)}
+  .articolo-body{font-size:16px}
+}
+
   .nav-logo-text{display:none}
   .nav-links{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .nav-link{padding:5px 8px;font-size:10px;letter-spacing:0.03em;white-space:nowrap}
@@ -540,7 +558,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   <div class="medialab-content">
     <div class="media-empty" id="media-empty" style="display:none;">Nessun contenuto pubblicato.</div>
     <div class="media-grid" id="media-grid">
-      <div class="media-card" data-mcat="contributo" style="grid-column:1/-1;border-right:var(--border);">
+      <div class="media-card" data-mcat="contributo" onclick="showArticolo('agrigento-distanza')" style="grid-column:1/-1;border-right:var(--border);cursor:pointer;" onmouseover="this.style.background='var(--yellow)'" onmouseout="this.style.background=''">
         <div class="media-card-meta">
           <span class="media-card-badge" style="background:var(--yellow);">Contributo</span>
           <span class="media-card-dur">📄 8 pagine</span>
@@ -566,6 +584,55 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     </div>
     <div class="footer-bottom"><span>© 2026 Laboratorio Politico Ravanusella</span><span>La trasparenza non è un favore, è un diritto.</span></div>
   </footer>
+</div>
+
+<!-- ══ ARTICOLO: AGRIGENTO A DISTANZA ══ -->
+<div class="page" id="page-articolo-agrigento-distanza">
+  <div class="articolo-wrap">
+    <button class="articolo-back" onclick="showPage('medialab')">← Media Lab</button>
+    <div class="articolo-tipo">Contributo</div>
+    <h1 class="articolo-title">Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede</h1>
+    <div class="articolo-meta">
+      <span>di Francesco Trupia</span>
+      <span>·</span>
+      <span>Dicembre 2025</span>
+      <span>·</span>
+      <span>8 min di lettura</span>
+    </div>
+    <div class="articolo-body">
+      <p>La seguente analisi propone una breve descrizione dei dati raccolti durante l'indagine "Agrigento a Distanza: Identità, Istanze e Prospettive dei Fuorisede" lanciata nelle settimane successive il periodo estivo 2025 dalla comunità di Scaro. La ricerca si poneva l'obiettivo di intercettare e analizzare l'identità politica dei fuorisede della città di Agrigento in modo da discutere delle nuove ed eventuali prospettive di partecipazione politica in vista delle elezioni amministrative del 2026.</p>
+      <p>Quello dell'emigrazione giovanile rimane un fenomeno assai più complesso rispetto alla percezione prodotta dalle statistiche ufficiali. Negli ultimi anni la provincia di Agrigento appare aver perso intorno a 16 mila cittadini. Un dato non completo considerando il numero di residenze mantenute in provincia durante gli anni di studio e di ricerca di un lavoro stabile. Appaiono più veritieri i dati dell'Anagrafe degli Italiani Residenti all'Estero (AIRE) che calcolano circa <span class="stat-inline">150.000</span> agrigentini residenti fuori dai confini nazionali.</p>
+      <p>La scomparsa di intere generazioni di agrigentini, incapaci di contribuire alla crescita e allo sviluppo della propria città, non appare assai diversa da quella di altri Paesi dell'Europa meridionale e delle zone di confine esterno all'Unione Europa.</p>
+
+      <h2>Metodologia</h2>
+      <p>Tra il 15 Agosto e il 15 Dicembre 2025, n=200 fuorisede agrigentini tra 18 e i 40 anni hanno volontariamente compilato il questionario online, strutturato in tre parti aventi l'obiettivo di intercettare le varie identità della "diaspora agrigentina", le eventuali istanze politiche da fuori Agrigento e le prospettive di partecipazione alle elezioni amministrative.</p>
+      <p>Il questionario è stato diffuso attraverso un metodo di snowball. La comunità di Scaro ha svolto il ruolo di gatekeeper per raggiungere gli interessati attraverso i canali social. I dati sono stati raccolti in forma interamente anonima.</p>
+
+      <h2>1. Le identità del Fuorisede</h2>
+      <p>Il <span class="stat-inline">50%</span> afferma di aver lasciato Agrigento per motivi di studio, seguito da un <span class="stat-inline">20,5%</span> che identifica nella mancanza di lavoro il motivo principale. Il 75% dei partecipanti ha tra i 18 e i 30 anni. Il 42% ha concluso una laurea magistrale.</p>
+      <p>Solo l'<span class="stat-inline">11%</span> dei partecipanti dichiara di vivere all'estero. La Sicilia rimane la regione con il numero più alto di fuorisede agrigentini, seguita da Lombardia ed Emilia Romagna.</p>
+      <blockquote>È complicata questa domanda: una tendenza a rimanere convive con un senso di colpa e irrisoluzione che ti mantiene legato alla terra. Di contro l'evoluzione della propria vita porta a collocarsi e a legarsi a nuovi spazi e a nuove persone.</blockquote>
+      <p>Il <span class="stat-inline">60,5%</span> ha pensato di tornare a vivere ad Agrigento. Le questioni familiari e il migliore tenore di vita sono i due motivi principali. Ciononostante, il 40,5% individua nella mancanza di opportunità lavorative il principale ostacolo al ritorno.</p>
+      <p>Nell'anno di Agrigento Capitale della Cultura 2025, quasi la totalità dei partecipanti (<span class="stat-inline">97%</span>) afferma di non aver pensato di sfruttare l'evento per ritornare a vivere in città. L'<span class="stat-inline">80%</span> dei fuorisede definisce l'evento come un'occasione persa per l'intera comunità agrigentina.</p>
+
+      <h2>2. Uno sguardo (disinteressato) da sinistra?</h2>
+      <p>La stragrande maggioranza dei fuorisede si posiziona lungo una linea ideologico-valoriale della sinistra italiana. I dati dimostrano però un alto livello di disinteresse nei confronti della partecipazione politica. Il <span class="stat-inline">54,4%</span> conferma di non aver mai partecipato attivamente alla vita politica locale, mentre un 7% ammette di non aver mai avuto interesse nella politica in generale.</p>
+      <p>Complessivamente, il <span class="stat-inline">90%</span> dei partecipanti rimane fuori dall'arena della politica tradizionale. Questo spiega perché il 72,4% dei fuorisede dice di non essere rappresentato da nessun partito politico presente in Parlamento.</p>
+      <blockquote>I dati raccolti non evidenziano il fenomeno della "post-democrazia": Agrigento appare come una città che, nell'era post-ideologica, è stata incapace di formulare un dibattito politico capace di coinvolgere l'intera cittadinanza.</blockquote>
+
+      <h2>3. Fuorisede per Agrigento?</h2>
+      <p>Il <span class="stat-inline">64%</span> appare motivato a tornare ad Agrigento per partecipare alle prossime elezioni amministrative. Nel secondo caso — partecipazione attiva — l'indice motivazionale scende al <span class="stat-inline">58,5%</span>. Il 60,2% di questo gruppo dice di essere interessato solo ad esercitare il proprio diritto di voto.</p>
+      <p>Tra coloro i quali hanno espresso una bassa motivazione alla partecipazione, il 41,5% si dice sfiduciato dalla classe politica locale e dalla possibilità di un possibile cambiamento.</p>
+      <p>La comunità dei fuorisede agrigentini afferma che Agrigento abbia bisogno di un serio e innovativo programma di cambiamento per la città, che possa soprattutto coinvolgere le giovani generazioni che hanno deciso di rimanere, e un coinvolgimento attivo dei fuorisede capaci di portare nuove prospettive e modelli di crescita insieme all'intera comunità agrigentina.</p>
+    </div>
+    <div class="articolo-tags">
+      <span class="badge">Diaspora</span>
+      <span class="badge">Partecipazione</span>
+      <span class="badge">Fuorisede</span>
+      <span class="badge">Agrigento</span>
+      <span class="badge">Contributo</span>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -746,6 +813,14 @@ function filterAlbo(cat, btn) {
   btn.classList.add("active");
   filtroCorrente = cat;
   renderAlboGrid(tuttiGliAtti);
+}
+
+function showArticolo(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+  document.getElementById("page-articolo-" + id).classList.add("active");
+  document.getElementById("nav-medialab").classList.add("active");
+  window.scrollTo(0, 0);
 }
 
 function showPage(name) {
