@@ -41,8 +41,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px
 .nav-link:hover{background:var(--yellow);color:var(--black)}
 .nav-link.active{background:var(--black);color:var(--white)}
 
-.page{display:none}
-.page.active{display:block}
+.page{display:none;opacity:0}
+.page.active{display:block;animation:pgFade 0.25s ease forwards}
+@keyframes pgFade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HOME HERO ── */
 .hero{
@@ -233,8 +234,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 .articolo-body blockquote{border-left:3px solid var(--yellow);padding:16px 24px;margin:32px 0;font-style:italic;color:#555;background:var(--gray-light)}
 .articolo-body .stat-inline{display:inline-block;font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--black)}
 .articolo-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:var(--border)}
-@media(min-width:600px) and (max-width:960px){.albo-grid{grid-template-columns:repeat(3,1fr);margin:0 20px 40px}}
-@media(max-width:600px){
+@media(max-width:960px){
   .articolo-wrap{padding:40px 20px 60px}
   .articolo-title{font-size:clamp(28px,9vw,44px)}
   .articolo-body{font-size:16px}
@@ -247,7 +247,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   .page-title{font-size:clamp(40px,11vw,60px)}
   .page-desc{font-size:15px}
   .filter-bar{margin:16px 20px;flex-wrap:wrap;gap:8px}
-  .albo-grid{margin:0 20px 40px;grid-template-columns:repeat(2,1fr)}
+  .albo-grid{margin:0 20px 40px;grid-template-columns:1fr}
   .scheda-wrap{padding:20px}
   .segnalazioni-form-wrap{padding:32px 20px}
   .form-row{grid-template-columns:1fr}
@@ -810,14 +810,18 @@ function filterAlbo(cat, btn) {
 function showArticolo(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-  document.getElementById("page-articolo-" + id).classList.add("active");
+  void document.body.offsetWidth;
+  document.getElementById("page-articolo-"+id).classList.add("active");
   document.getElementById("nav-medialab").classList.add("active");
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 function showPage(name) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+  });
   document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+  void document.body.offsetWidth; // force reflow
   document.getElementById("page-"+name).classList.add("active");
   document.getElementById("nav-"+name).classList.add("active");
   window.scrollTo(0,0);
