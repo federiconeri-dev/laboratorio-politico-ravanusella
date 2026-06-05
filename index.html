@@ -41,8 +41,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px
 .nav-link:hover{background:var(--yellow);color:var(--black)}
 .nav-link.active{background:var(--black);color:var(--white)}
 
-.page{display:none}
-.page.active{display:block}
+/* FADE TRANSIZIONE */
+.page{display:none;opacity:0;transition:opacity 0.3s ease}
+.page.active{display:block;opacity:1}
+.page.fade-in{animation:fadeIn 0.3s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* PAGE HERO UNIFORME */
+.page-hero{padding:72px 60px;border-bottom:2px solid var(--black);position:relative;overflow:hidden;background:#F7F7F5}
+.page-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:18px}
+.page-title{font-family:var(--font-display);font-size:clamp(52px,6vw,80px);font-weight:900;line-height:0.92;letter-spacing:-0.02em;margin-bottom:20px}
+.page-title em{font-style:italic}
+.page-desc{font-family:var(--font-body);font-size:17px;color:#555;max-width:520px;line-height:1.65;margin-bottom:28px}
+
 
 /* ── HOME HERO ── */
 .hero{
@@ -447,14 +458,14 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
       </svg>
     </div>
     <div style="position:relative;max-width:1280px;margin:0 auto;">
-      <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:16px;">Consiglio Comunale di Agrigento</div>
-      <h1 style="font-family:var(--font-display);font-size:clamp(52px,6vw,88px);font-weight:900;line-height:0.9;letter-spacing:-0.02em;margin-bottom:20px;">Consiglio<br><em style="font-style:italic;">Comunale</em></h1>
-      <p style="font-family:var(--font-body);font-size:18px;color:#666;max-width:480px;line-height:1.65;">Verbali e consiglieri del Comune di Agrigento. La trasparenza come strumento di partecipazione.</p>
+      <p class="page-eyebrow">Consiglio Comunale di Agrigento</p>
+      <h1 class="page-title">Consiglio<br><em>Comunale</em></h1>
+      <p class="page-desc">Verbali e consiglieri del Comune di Agrigento. La trasparenza come strumento di partecipazione.</p>
     </div>
   </section>
 
   <!-- Tabs -->
-  <div style="max-width:1280px;margin:0 auto;padding:40px 60px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:40px clamp(20px,5vw,60px) 0;">
     <div style="display:inline-flex;border:2px solid var(--black);">
       <button id="tab-btn-consiglieri" onclick="switchTab('consiglieri',this)" style="padding:12px 24px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;border:none;background:var(--black);color:var(--white);cursor:pointer;">Consiglieri</button>
       <button id="tab-btn-verbali" onclick="switchTab('verbali',this)" style="padding:12px 24px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;border:none;border-left:2px solid var(--black);background:transparent;color:var(--black);cursor:pointer;">Verbali</button>
@@ -462,13 +473,13 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   </div>
 
   <!-- Tab: Consiglieri -->
-  <div class="tab-content active" id="tab-consiglieri" style="max-width:1280px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,5vw,60px) 60px;">
+  <div class="tab-content active" id="tab-consiglieri" style="max-width:1280px;margin:0 auto;padding:32px clamp(20px,5vw,60px) 60px;">
     <div id="consiglieri-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;"></div>
     <div id="schede-container"></div>
   </div>
 
   <!-- Tab: Verbali -->
-  <div class="tab-content" id="tab-verbali" style="max-width:1280px;margin:0 auto;padding:32px 60px 60px;">
+  <div class="tab-content" id="tab-verbali" style="max-width:1280px;margin:0 auto;padding:32px clamp(20px,5vw,60px) 60px;">
     <div style="border:2px solid var(--black);">
       <div style="display:grid;grid-template-columns:64px 96px 1fr;gap:16px;padding:12px 24px;background:var(--black);color:var(--white);">
         <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;">N°</span>
@@ -816,17 +827,31 @@ function filterAlbo(cat, btn) {
 }
 
 function showArticolo(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active","fade-in");
+    p.style.display = "none";
+  });
   document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-  document.getElementById("page-articolo-" + id).classList.add("active");
+  const pg = document.getElementById("page-articolo-" + id);
+  pg.style.display = "block";
+  requestAnimationFrame(() => {
+    pg.classList.add("active","fade-in");
+  });
   document.getElementById("nav-medialab").classList.add("active");
   window.scrollTo(0, 0);
 }
 
 function showPage(name) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active","fade-in");
+    p.style.display = "none";
+  });
   document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-  document.getElementById("page-"+name).classList.add("active");
+  const pg = document.getElementById("page-"+name);
+  pg.style.display = "block";
+  requestAnimationFrame(() => {
+    pg.classList.add("active","fade-in");
+  });
   document.getElementById("nav-"+name).classList.add("active");
   window.scrollTo(0,0);
   if (name === "consiglio") {
