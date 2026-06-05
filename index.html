@@ -220,10 +220,10 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 .media-empty{padding:60px;text-align:center;font-family:var(--font-mono);font-size:13px;color:var(--gray-dark)}
 
 @media(max-width:768px){
-  nav{padding:0 16px;height:54px}
+  nav{padding:0 12px;height:54px}
   .nav-logo-text{display:none}
-  .nav-links{gap:0}
-  .nav-link{padding:5px 10px;font-size:11px;letter-spacing:0.04em}
+  .nav-links{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .nav-link{padding:5px 8px;font-size:10px;letter-spacing:0.03em;white-space:nowrap}
   .page-hero{padding:48px 20px}
   .page-title{font-size:clamp(44px,12vw,64px)}
   .filter-bar{margin:16px 20px;flex-wrap:wrap;gap:8px}
@@ -239,7 +239,9 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   .footer-bottom{flex-direction:column;gap:8px;text-align:center}
   .verbali-table-wrap{margin:20px 20px 40px;overflow-x:auto}
 }
-
+@media(max-width:768px){
+  .strumenti-grid-mobile{grid-template-columns:1fr !important}
+}
 </style>
 </head>
 <body>
@@ -313,7 +315,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <div style="max-width:1280px;margin:0 auto;">
       <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px;">Strumenti</div>
       <h2 style="font-family:var(--font-display);font-size:clamp(28px,4vw,38px);font-weight:900;margin-bottom:clamp(32px,5vw,56px);letter-spacing:-0.02em;">Il laboratorio civico</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--black);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--black);" id="strumenti-grid">
         <!-- AlboPOP -->
         <div onclick="showPage('albopop')" style="padding:48px;border-right:2px solid var(--black);border-bottom:2px solid var(--black);background:var(--white);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--yellow)'" onmouseout="this.style.background='var(--white)'">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:16px;opacity:0.7;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -781,6 +783,19 @@ function inviaSegnaLazione() {
 
 renderConsiglieri();
 fetchAtti();
+
+// Responsive quadranti
+function fixGrid() {
+  const grid = document.getElementById("strumenti-grid");
+  if (!grid) return;
+  if (window.innerWidth <= 768) {
+    grid.style.gridTemplateColumns = "1fr";
+  } else {
+    grid.style.gridTemplateColumns = "1fr 1fr";
+  }
+}
+fixGrid();
+window.addEventListener("resize", fixGrid);
 </script>
 </body>
 </html>
