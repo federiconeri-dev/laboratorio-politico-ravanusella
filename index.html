@@ -538,8 +538,25 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <button class="filter-btn" onclick="filterMedia('contributo',this)">Contributi</button>
   </div>
   <div class="medialab-content">
-    <div class="media-empty" id="media-empty">Nessun contenuto pubblicato.</div>
-    <div class="media-grid" id="media-grid" style="display:none;"></div>
+    <div class="media-empty" id="media-empty" style="display:none;">Nessun contenuto pubblicato.</div>
+    <div class="media-grid" id="media-grid">
+      <div class="media-card" data-mcat="contributo" style="grid-column:1/-1;border-right:var(--border);">
+        <div class="media-card-meta">
+          <span class="media-card-badge" style="background:var(--yellow);">Contributo</span>
+          <span class="media-card-dur">📄 8 pagine</span>
+          <span class="media-card-date">Dicembre 2025</span>
+        </div>
+        <h3 class="media-card-title" style="font-size:clamp(22px,3vw,32px);">Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede</h3>
+        <p class="media-card-desc" style="font-size:14px;">Una ricerca qualitativa su 200 fuorisede agrigentini tra 18 e 40 anni. Identità politica, istanze inascoltate, prospettive di partecipazione alle amministrative 2026. Condotta da Francesco Trupia, ricercatore agrigentino che si occupa di democrazie, minoranze e diaspore in Europa orientale.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:var(--border);padding:4px 10px;">Diaspora</span>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:var(--border);padding:4px 10px;">Partecipazione</span>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:var(--border);padding:4px 10px;">Fuorisede</span>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:var(--border);padding:4px 10px;">Agrigento</span>
+        </div>
+        <div style="margin-top:20px;font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">di Francesco Trupia</div>
+      </div>
+    </div>
   </div>
   <footer>
     <div class="footer-grid">
