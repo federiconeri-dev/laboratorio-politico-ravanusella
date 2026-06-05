@@ -583,14 +583,9 @@ function renderConsiglieri() {
         <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;border:1px solid currentColor;padding:2px 6px;display:inline-block;margin-bottom:8px;">${c.schieramento === 'maggioranza' ? 'Maggioranza' : 'Opposizione'}</span>
         <h3 style="font-family:var(--font-display);font-size:17px;font-weight:600;line-height:1.2;margin-bottom:4px;">${c.nome}</h3>
         <p class="card-party" style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);margin-bottom:12px;transition:color 0.15s;">${c.lista}</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:10px;border-top:1px solid currentColor;opacity:0.5;">
-          <div style="display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> —
+        <div style="display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11px;padding-top:10px;border-top:1px solid currentColor;">
+            🗳 ${c.voti ? c.voti + ' pref.' : '—'}
           </div>
-          <div style="display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> —
-          </div>
-        </div>
       </div>
     </div>`;
   }
