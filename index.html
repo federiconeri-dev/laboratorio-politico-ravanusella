@@ -397,6 +397,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <button class="filter-btn" onclick="filterAlbo('ambiente',this)">Ambiente</button>
     <button class="filter-btn" onclick="filterAlbo('servizi_sociali',this)">Servizi Sociali</button>
     <button class="filter-btn" onclick="filterAlbo('lavori_pubblici',this)">Lavori Pubblici</button>
+    <button class="filter-btn" onclick="filterAlbo('sicurezza',this)">Sicurezza</button>
     <button class="filter-btn" onclick="filterAlbo('altro',this)">Altro</button>
   </div>
   <div class="albo-grid" id="albo-grid"><div class="albo-loading">Caricamento atti in corso...</div></div>
@@ -691,7 +692,7 @@ function renderAlboGrid(atti) {
   const grid = document.getElementById("albo-grid");
   const filtrati = filtroCorrente === "tutti" ? atti : atti.filter(a => a.category === filtroCorrente);
   if (!filtrati.length) { grid.innerHTML = '<div class="albo-empty"><p>Nessun atto in questa categoria.</p></div>'; return; }
-  const catLabel = {urbanistica:"Urbanistica",bilancio:"Bilancio",eventi:"Eventi",ambiente:"Ambiente",servizi_sociali:"Servizi Sociali",lavori_pubblici:"Lavori Pubblici",altro:"Altro"};
+  const catLabel = {urbanistica:"Urbanistica",bilancio:"Bilancio",eventi:"Eventi",ambiente:"Ambiente",servizi_sociali:"Servizi Sociali",lavori_pubblici:"Lavori Pubblici",sicurezza:"Sicurezza",altro:"Altro"};
   grid.innerHTML = filtrati.map(a => {
     const link = a.doc_url || a.telegram_link || 'https://t.me/albopretorioxpigri';
     return `
