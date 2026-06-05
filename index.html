@@ -260,7 +260,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <a class="nav-link" id="nav-albopop" onclick="showPage('albopop')">AlboPOP</a>
     <a class="nav-link" id="nav-consiglio" onclick="showPage('consiglio')">Consiglio</a>
     <a class="nav-link" id="nav-medialab" onclick="showPage('medialab')">Media Lab</a>
-    <a class="nav-link" id="nav-segnalazioni" onclick="showPage('segnalazioni')">Segnalazioni</a>
+    <a class="nav-link" id="nav-segnalazioni" onclick="showPage('segnalazioni')">Proposte</a>
   </div>
 </nav>
 
@@ -338,8 +338,8 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
         <!-- Segnalazioni -->
         <div onclick="showPage('segnalazioni')" style="padding:48px;background:var(--white);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--yellow)'" onmouseout="this.style.background='var(--white)'">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:16px;opacity:0.7;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <h3 style="font-family:var(--font-display);font-size:28px;font-weight:700;margin-bottom:12px;">Segnalazioni</h3>
-          <p style="font-size:15px;color:#555;line-height:1.6;margin-bottom:24px;">Ponte diretto con il tuo consigliere. Segnala, chiedi, partecipa.</p>
+          <h3 style="font-family:var(--font-display);font-size:28px;font-weight:700;margin-bottom:12px;">Proposte</h3>
+          <p style="font-size:15px;color:#555;line-height:1.6;margin-bottom:24px;">Idee per il Lab, segnalazioni ai consiglieri. Partecipa direttamente.</p>
           <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Esplora →</span>
         </div>
       </div>
@@ -468,12 +468,20 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 <!-- ══ SEGNALAZIONI ══ -->
 <div class="page" id="page-segnalazioni">
   <div class="page-hero segnalazioni-hero">
-    <p class="page-eyebrow">Ponte Civico</p>
-    <h1 class="page-title" style="font-style:italic;">Segnalazioni</h1>
-    <p class="page-desc">Scrivi direttamente ai consiglieri comunali aderenti al Laboratorio Politico Ravanusella. La tua segnalazione viene inoltrata senza filtri.</p>
+    <p class="page-eyebrow">Partecipa</p>
+    <h1 class="page-title" style="font-style:italic;">Proposte</h1>
+    <p class="page-desc">Hai un'idea per il Laboratorio o una segnalazione per i consiglieri aderenti? Questo è il canale diretto. Nessun filtro, nessun intermediario.</p>
   </div>
   <div class="segnalazioni-form-wrap">
-    <div class="form-group"><label class="form-label">La tua segnalazione</label><textarea class="form-textarea" id="seg-messaggio" placeholder="Di cosa ha bisogno Agrigento adesso?"></textarea></div>
+    <div class="form-group">
+      <label class="form-label">Tipo di proposta</label>
+      <select class="form-select" id="seg-tipo">
+        <option value="">Seleziona il tipo</option>
+        <option value="idea_lab">Idea per il Lab — eventi, attività, contenuti editoriali</option>
+        <option value="segnalazione">Segnalazione ai consiglieri aderenti — problemi, richieste, istanze civiche</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">La tua proposta</label><textarea class="form-textarea" id="seg-messaggio" placeholder="Scrivi qui la tua idea o segnalazione..."></textarea></div>
     <div class="form-group"><label class="form-label">Categoria</label>
       <select class="form-select" id="seg-categoria">
         <option value="">Seleziona una categoria</option>
@@ -483,6 +491,9 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
         <option value="verde_pubblico">Verde pubblico</option>
         <option value="acqua">Acqua</option>
         <option value="sicurezza">Sicurezza</option>
+        <option value="evento">Evento</option>
+        <option value="editoriale">Editoriale</option>
+        <option value="attivita">Attività</option>
         <option value="altro">Altro</option>
       </select>
     </div>
@@ -492,9 +503,9 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
         <div><label class="form-label">Email</label><input class="form-input" id="seg-email" type="email" placeholder="Email di contatto"></div>
       </div>
     </div>
-    <button class="form-submit" id="seg-btn" onclick="inviaSegnaLazione()">✈ Invia Segnalazione</button>
-    <p class="form-note">I tuoi dati di contatto saranno utilizzati solo per eventuali riscontri sulla segnalazione.</p>
-    <div class="form-success" id="seg-success"><h3>Segnalazione inviata ✓</h3><p>Grazie. La tua segnalazione è stata registrata.</p></div>
+    <button class="form-submit" id="seg-btn" onclick="inviaSegnaLazione()">✈ Invia Proposta</button>
+    <p class="form-note">I tuoi dati di contatto saranno utilizzati solo per eventuali riscontri sulla proposta.</p>
+    <div class="form-success" id="seg-success"><h3>Proposta inviata ✓</h3><p>Grazie. La tua proposta è stata registrata.</p></div>
   </div>
   <footer>
     <div class="footer-grid">
