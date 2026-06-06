@@ -236,6 +236,8 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 .articolo-body .stat-inline{display:inline-block;font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--black)}
 .articolo-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:var(--border)}
 @media(max-width:960px){
+  /* BODY */
+  body{overflow-x:hidden}
   /* NAV */
   nav{padding:0 16px;height:54px}
   .nav-logo-text{display:none}
@@ -243,6 +245,8 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   .nav-link{padding:6px 12px;font-size:11px;white-space:nowrap}
   /* TICKER */
   .ticker-item{font-size:11px;padding:0 20px}
+  /* SEZIONE STRUMENTI */
+  .section-strumenti{padding:40px 20px !important}
   /* HERO */
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-left{padding:40px 20px}
@@ -257,8 +261,8 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   /* ALBO */
   .albo-grid{margin:0 20px 40px;grid-template-columns:1fr}
   /* STRUMENTI */
-  #strumenti-grid{grid-template-columns:1fr !important}
-  .strumento-q{padding:28px 20px !important;border-right:2px solid var(--black) !important}
+  #strumenti-grid{grid-template-columns:1fr !important;border:none !important}
+  .strumento-q{padding:28px 20px !important;border:2px solid var(--black) !important;margin-bottom:-2px}
   .strumento-h{font-size:22px !important}
   .strumento-p{font-size:13px !important}
   /* CONSIGLIO */
