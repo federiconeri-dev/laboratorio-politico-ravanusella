@@ -43,8 +43,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px
 .nav-link.active{background:var(--black);color:var(--white)}
 
 .page{display:none}
-.page.active{display:block;animation:pgFade 0.22s ease both}
-@keyframes pgFade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.page.active{display:block;animation:pgFade 0.35s ease both}
+@keyframes pgFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HOME HERO ── */
 .hero{
@@ -951,6 +951,9 @@ function renderTicker(atti) {
   if (!albo.length) albo = [badge('ALBO') + 'Laboratorio Politico Ravanusella — Civic Radar Agrigento'];
   const tutti = [...albo, mediaItem].map(t => `<span class="ticker-item">${t}<span class="ticker-sep">◆</span></span>`).join('');
   inner.innerHTML = tutti + tutti + tutti;
+  // durata proporzionale: ~15s per item
+  const dur = Math.max(tutti.split('ticker-item').length * 12, 80);
+  inner.style.animationDuration = dur + 's';
 }
 
 function renderHomeFeed(atti) {
