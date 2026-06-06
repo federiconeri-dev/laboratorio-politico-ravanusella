@@ -41,21 +41,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px
 .nav-link:hover{background:var(--yellow);color:var(--black)}
 .nav-link.active{background:var(--black);color:var(--white)}
 
-.page{
-  position:absolute;
-  top:0;left:0;width:100%;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 0.3s ease;
-  visibility:hidden;
-}
-.page.active{
-  position:relative;
-  opacity:1;
-  pointer-events:auto;
-  visibility:visible;
-  transition:opacity 0.3s ease;
-}
+.page{display:none}
+.page.active{display:block;animation:pgFade 0.22s ease both}
+@keyframes pgFade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HOME HERO ── */
 .hero{
@@ -828,9 +816,14 @@ function showArticolo(id) {
 }
 
 function showPage(name) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+    p.style.animation = "none";
+  });
   document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-  document.getElementById("page-"+name).classList.add("active");
+  const pg = document.getElementById("page-"+name);
+  pg.classList.add("active");
+  pg.style.animation = "";
   document.getElementById("nav-"+name).classList.add("active");
   window.scrollTo(0,0);
   if (name === "consiglio") {
