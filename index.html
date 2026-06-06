@@ -25,7 +25,7 @@ body{font-family:var(--font-body);background:var(--white);color:var(--black);fon
 
 /* TICKER */
 .ticker-wrap{background:var(--black);color:var(--yellow);padding:9px 0;overflow:hidden;white-space:nowrap}
-.ticker-inner{display:inline-flex;animation:ticker 90s linear infinite}
+.ticker-inner{display:inline-flex;animation:ticker 120s linear infinite;will-change:transform}
 .ticker-item{font-family:var(--font-mono);font-size:12px;letter-spacing:0.03em;padding:0 40px}
 .ticker-item span{color:var(--yellow);opacity:0.6;margin-right:14px;font-weight:500}
 .ticker-sep{color:var(--yellow);opacity:0.35;padding:0 6px}
@@ -234,33 +234,45 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 .articolo-body blockquote{border-left:3px solid var(--yellow);padding:16px 24px;margin:32px 0;font-style:italic;color:#555;background:var(--gray-light)}
 .articolo-body .stat-inline{display:inline-block;font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--black)}
 .articolo-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:var(--border)}
-@media(max-width:960px){
-  .articolo-wrap{padding:40px 20px 60px}
-  .articolo-title{font-size:clamp(28px,9vw,44px)}
-  .articolo-body{font-size:16px}
-}
-
+@media(max-width:768px){
+  /* NAV */
+  nav{padding:0 12px;height:52px}
   .nav-logo-text{display:none}
-  .nav-links{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .nav-link{padding:5px 8px;font-size:10px;letter-spacing:0.03em;white-space:nowrap}
+  .nav-links{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .nav-link{padding:6px 10px;font-size:11px;letter-spacing:0.05em;white-space:nowrap}
+  /* HERO */
   .page-hero{padding:40px 20px}
   .page-title{font-size:clamp(40px,11vw,60px)}
   .page-desc{font-size:15px}
+  /* FILTRI */
   .filter-bar{margin:16px 20px;flex-wrap:wrap;gap:8px}
+  /* ALBO */
   .albo-grid{margin:0 20px 40px;grid-template-columns:1fr}
+  /* CONSIGLIO */
   .scheda-wrap{padding:20px}
+  .verbali-table-wrap{margin:20px 20px 40px;overflow-x:auto}
+  /* PROPOSTE */
   .segnalazioni-form-wrap{padding:32px 20px}
   .form-row{grid-template-columns:1fr}
+  /* MEDIA */
   .medialab-filter-bar{margin:20px 20px 0;flex-wrap:wrap;width:auto}
   .medialab-content{padding:0 20px 40px}
   .media-grid{grid-template-columns:1fr}
+  /* ARTICOLO */
+  .articolo-wrap{padding:40px 20px 60px}
+  .articolo-title{font-size:clamp(28px,9vw,44px)}
+  .articolo-body{font-size:16px}
+  /* FOOTER */
   footer{padding:40px 20px 28px}
   .footer-grid{grid-template-columns:1fr;gap:28px}
   .footer-bottom{flex-direction:column;gap:8px;text-align:center}
-  .verbali-table-wrap{margin:20px 20px 40px;overflow-x:auto}
-  .strumento-q{padding:28px 20px !important;border-right:2px solid var(--black) !important}
+  /* STRUMENTI */
+  .strumento-q{padding:28px 20px !important}
   .strumento-h{font-size:22px !important}
   .strumento-p{font-size:13px !important}
+  /* TICKER mobile */
+  .ticker-item{font-size:11px;padding:0 20px}
+}
 }
 @media(max-width:960px){
   .strumenti-grid-mobile{grid-template-columns:1fr !important}
@@ -931,11 +943,13 @@ async function fetchAtti() {
 }
 
 function renderTicker(atti) {
-  if (!atti.length) return;
   const inner = document.getElementById("ticker-inner");
-  let html = "";
-  atti.forEach(a => { html += `<span class="ticker-item"><span>${a.data||""}</span>${a.oggetto||a.tipo||"Nuovo atto"}</span><span class="ticker-sep">◆</span>`; });
-  inner.innerHTML = html + html;
+  const badge = (label) => `<span style="font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:0.1em;padding:2px 6px;margin-right:8px;vertical-align:middle;${label==='ALBO'?'background:var(--yellow);color:var(--black)':'border:1px solid var(--yellow);color:var(--yellow)'}">${label}</span>`;
+  const mediaItem = badge('MEDIA LAB') + 'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede';
+  let albo = atti.map(a => badge('ALBO') + (a.data ? a.data + ' — ' : '') + (a.oggetto || a.tipo || 'Atto comunale'));
+  if (!albo.length) albo = [badge('ALBO') + 'Laboratorio Politico Ravanusella — Civic Radar Agrigento'];
+  const tutti = [...albo, mediaItem].map(t => `<span class="ticker-item">${t}<span class="ticker-sep">◆</span></span>`).join('');
+  inner.innerHTML = tutti + tutti + tutti;
 }
 
 function renderHomeFeed(atti) {
