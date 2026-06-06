@@ -306,29 +306,21 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 <div class="page active" id="page-home">
 
   <!-- HERO -->
-  <section style="position:relative;min-height:90vh;display:flex;align-items:center;border-bottom:2px solid var(--black);overflow:hidden;">
-    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
-      <svg style="position:absolute;left:20%;top:50%;transform:translateY(-50%);width:700px;height:700px;opacity:0.05;" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="350" cy="350" r="320" fill="none" stroke="#000" stroke-width="80"/>
-        <circle cx="350" cy="350" r="200" fill="none" stroke="#000" stroke-width="50"/>
-        <circle cx="350" cy="350" r="90" fill="none" stroke="#000" stroke-width="25"/>
-      </svg>
+  <section class="hero" style="border-bottom:2px solid var(--black);">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">Civic Radar · Agrigento</div>
+      <h1 class="hero-title">Laboratorio<br><em>Politico</em></h1>
+      <p class="hero-desc">Cultura, attivismo e monitoraggio civico sul Comune di Agrigento. Organizziamo la città di domani.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" onclick="showPage('segnalazioni')">Segnala ora →</a>
+        <a class="btn-secondary" onclick="showPage('albopop')">AlboPOP</a>
+      </div>
     </div>
-    <div style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:clamp(32px,5vw,60px) clamp(20px,5vw,60px);width:100%;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,64px);align-items:center;">
-        <!-- LEFT -->
-        <div>
-          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:24px;">Civic Radar · Agrigento</div>
-          <h1 style="font-family:var(--font-display);font-size:clamp(52px,10vw,104px);font-weight:900;line-height:0.88;letter-spacing:-0.02em;margin-bottom:32px;">Laboratorio<br><em style="font-style:italic;font-weight:700;">Politico</em></h1>
-          <p style="font-family:var(--font-body);font-size:clamp(15px,2vw,18px);color:#666;max-width:480px;line-height:1.7;margin-bottom:40px;">Cultura, attivismo e monitoraggio civico sul Comune di Agrigento. Organizziamo la città di domani.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:12px;">
-            <a class="btn-primary" onclick="showPage('segnalazioni')" style="display:inline-flex;align-items:center;gap:8px;">Segnala ora →</a>
-            <a class="btn-secondary" onclick="showPage('albopop')">AlboPOP</a>
-          </div>
-        </div>
-        <!-- RIGHT: feed -->
-        <div>
-          <div style="border:2px solid var(--black);background:var(--white);">
+    <!-- RIGHT: feed -->
+    <div class="hero-right">
+      <div class="feed-box">
+        <div style="border:2px solid var(--black);background:var(--white);">
             <div style="border-bottom:2px solid var(--black);padding:12px 16px;display:flex;align-items:center;gap:8px;">
               <div class="feed-dot"></div>
               <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Feed Live — AlboPOP</span>
@@ -340,7 +332,6 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
               </div>
             </div>
             <div onclick="showPage('albopop')" style="border-top:2px solid var(--black);padding:12px 16px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;text-align:center;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--black)';this.style.color='var(--white)'" onmouseout="this.style.background='';this.style.color=''">Vai all'archivio completo →</div>
-          </div>
         </div>
       </div>
     </div>
