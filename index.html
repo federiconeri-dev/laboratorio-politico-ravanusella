@@ -87,6 +87,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px
 .section-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px}
 .section-title{font-family:var(--font-display);font-size:38px;font-weight:900;margin-bottom:48px;letter-spacing:-0.02em}
 .strumenti-grid{display:grid;grid-template-columns:1fr 1fr;border:var(--border)}
+.strumento-q:hover{background:var(--yellow) !important}
 .strumento-card{
   padding:52px 48px;
   border-right:var(--border);
@@ -944,7 +945,7 @@ async function fetchAtti() {
     }
   } catch(e) {
     document.getElementById("albo-grid").innerHTML = '<div class="albo-empty"><p>Impossibile caricare gli atti.</p><a class="btn-secondary" href="https://t.me/albopretorioxpigri" target="_blank" style="display:inline-flex;">Vai su Telegram →</a></div>';
-    document.getElementById("home-feed").innerHTML = '<div class="feed-item"><div class="feed-title" style="color:var(--gray-dark);font-size:13px;">Feed non disponibile. <a href="https://t.me/albopretorioxpigri" target="_blank" style="color:var(--black);">Vai su Telegram →</a></div></div>';
+    document.getElementById("home-feed").innerHTML = '<div class="feed-item" onclick="showPage('albopop')" style="cursor:pointer"><div class="feed-title" style="color:var(--gray-dark);font-size:13px;">Feed non disponibile. <a href="https://t.me/albopretorioxpigri" target="_blank" style="color:var(--black);">Vai su Telegram →</a></div></div>';
   }
 }
 
