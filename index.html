@@ -967,15 +967,39 @@ function renderHomeFeed(atti) {
   const mediaItems = [
     {tipo:'medialab', data:'Dicembre 2025', testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede'}
   ];
-  const alboItems = atti.slice(0,3).map(function(a) {
+  const alboItems = atti.slice(0,10).map(function(a) {
     return {tipo:'albopop', data:a.data||'—', testo:a.oggetto||a.tipo||'Atto comunale'};
   });
-  const items = alboItems.slice(0,2).concat(mediaItems).concat(alboItems.slice(2)).slice(0,4);
-  if (!items.length) {
+
+  // Costruisce lista bilanciata: max 2 per tipologia, sempre 3 in totale
+  var result = [];
+  var alboCount = 0, mediaCount = 0;
+  var pool = [];
+  // Alterna albo e media
+  var ai = 0, mi = 0;
+  while (result.length < 3) {
+    if (ai < alboItems.length && alboCount < 2) {
+      result.push(alboItems[ai++]); alboCount++;
+    } else if (mi < mediaItems.length && mediaCount < 2) {
+      result.push(mediaItems[mi++]); mediaCount++;
+    } else if (ai < alboItems.length) {
+      result.push(alboItems[ai++]); alboCount++;
+    } else {
+      break;
+    }
+  }
+  // Se abbiamo 2 albo consecutivi, inserisci media in mezzo
+  if (result.length >= 3 && result[0].tipo === result[1].tipo && result[1].tipo === 'albopop' && mediaCount === 0) {
+    result.splice(1, 0, mediaItems[0]);
+    result = result.slice(0, 3);
+  }
+
+  if (!result.length) {
     feed.innerHTML = '<div style="padding:24px 16px;text-align:center;"><p style="font-family:var(--font-mono);font-size:12px;color:var(--gray-dark);">Nessun avviso recente</p></div>';
     return;
   }
-  feed.innerHTML = items.map(function(item) {
+
+  feed.innerHTML = result.map(function(item) {
     var isAlbo = item.tipo === 'albopop';
     var badgeStyle = isAlbo ? 'background:var(--yellow);color:var(--black)' : 'border:1px solid #bbb;color:#888';
     var badgeLabel = isAlbo ? 'ALBO' : 'MEDIA LAB';
