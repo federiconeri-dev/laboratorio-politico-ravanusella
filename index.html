@@ -966,48 +966,57 @@ function renderTicker(atti) {
 
 function renderHomeFeed(atti) {
   const feed = document.getElementById("home-feed");
-  const mediaItems = [
-    {tipo:'medialab', data:'Dicembre 2025', testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede'}
-  ];
-  const alboItems = atti.slice(0,10).map(function(a) {
-    return {tipo:'albopop', data:a.data||'—', testo:a.oggetto||a.tipo||'Atto comunale'};
-  });
 
-  // Costruisce lista bilanciata: max 2 per tipologia, sempre 3 in totale
+  // Tutte le fonti con etichetta
+  const fonti = [
+    {tipo:'albopop',    label:'ALBO',      items: atti.slice(0,10).map(function(a){ return {data:a.data||'—', testo:a.oggetto||a.tipo||'Atto comunale'}; }) },
+    {tipo:'medialab',   label:'CONTRIBUTO', items: [
+      {data:'Dicembre 2025', testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede'},
+    ]},
+    {tipo:'medialab',   label:'TALK',      items: [
+      {data:'Giugno 2026', testo:'Talk — Laboratorio Politico Ravanusella'},
+    ]},
+  ];
+
+  // Costruisce feed: max 2 per etichetta, tot 3 item
+  var counts = {};
   var result = [];
-  var alboCount = 0, mediaCount = 0;
-  var pool = [];
-  // Alterna albo e media
-  var ai = 0, mi = 0;
-  while (result.length < 3) {
-    if (ai < alboItems.length && alboCount < 2) {
-      result.push(alboItems[ai++]); alboCount++;
-    } else if (mi < mediaItems.length && mediaCount < 2) {
-      result.push(mediaItems[mi++]); mediaCount++;
-    } else if (ai < alboItems.length) {
-      result.push(alboItems[ai++]); alboCount++;
-    } else {
-      break;
+  var pointers = fonti.map(function(){ return 0; });
+  var maxItems = 3, maxPerLabel = 2, safety = 0;
+
+  while (result.length < maxItems && safety < 50) {
+    safety++;
+    var added = false;
+    for (var i = 0; i < fonti.length; i++) {
+      var f = fonti[i];
+      var cnt = counts[f.label] || 0;
+      if (cnt < maxPerLabel && pointers[i] < f.items.length) {
+        result.push({tipo: f.tipo, label: f.label, data: f.items[pointers[i]].data, testo: f.items[pointers[i]].testo});
+        counts[f.label] = cnt + 1;
+        pointers[i]++;
+        added = true;
+        if (result.length >= maxItems) break;
+      }
     }
-  }
-  // Se abbiamo 2 albo consecutivi, inserisci media in mezzo
-  if (result.length >= 3 && result[0].tipo === result[1].tipo && result[1].tipo === 'albopop' && mediaCount === 0) {
-    result.splice(1, 0, mediaItems[0]);
-    result = result.slice(0, 3);
+    if (!added) break;
   }
 
   if (!result.length) {
-    feed.innerHTML = '<div style="padding:24px 16px;text-align:center;"><p style="font-family:var(--font-mono);font-size:12px;color:var(--gray-dark);">Nessun avviso recente</p></div>';
+    feed.innerHTML = '<div style="padding:24px 16px;text-align:center;"><p style="font-family:var(--font-mono);font-size:12px;color:var(--gray-dark);">Nessun contenuto recente</p></div>';
     return;
   }
 
+  var labelColors = {
+    'ALBO':       'background:var(--yellow);color:var(--black)',
+    'CONTRIBUTO': 'border:1px solid #bbb;color:#888',
+    'TALK':       'background:var(--black);color:var(--white)',
+  };
+
   feed.innerHTML = result.map(function(item) {
-    var isAlbo = item.tipo === 'albopop';
-    var badgeStyle = isAlbo ? 'background:var(--yellow);color:var(--black)' : 'border:1px solid #bbb;color:#888';
-    var badgeLabel = isAlbo ? 'ALBO' : 'MEDIA LAB';
+    var badgeStyle = labelColors[item.label] || 'border:1px solid #bbb;color:#888';
     return '<div onclick="showPage(\'' + item.tipo + '\')" style="padding:14px 16px;border-bottom:1px solid #eee;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background=\'var(--yellow)\'" onmouseout="this.style.background=\'\'">'
       + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">'
-      + '<span style="font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:0.1em;padding:2px 5px;' + badgeStyle + '">' + badgeLabel + '</span>'
+      + '<span style="font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:0.1em;padding:2px 6px;' + badgeStyle + '">' + item.label + '</span>'
       + '<span style="font-family:var(--font-mono);font-size:10px;color:var(--gray-dark);">' + item.data + '</span>'
       + '</div>'
       + '<p style="font-size:14px;font-weight:500;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + item.testo + '</p>'
