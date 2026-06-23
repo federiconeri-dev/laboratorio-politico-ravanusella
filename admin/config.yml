@@ -5,17 +5,3 @@ backend:
   auth_type: implicit
   app_id: OV23lieVtR7BqSRSnzDb
   redirect_uri: https://fedeneri.github.io/laboratorio-politico-ravanusella/admin/
-
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
-
-collections:
-  - name: "pagine"
-    label: "Pagine del sito"
-    files:
-      - name: "index"
-        label: "Homepage"
-        file: "index.html"
-        fields:
-          - { label: "Titolo", name: "title", widget: "string" }
-          - { label: "Contenuto", name: "body", widget: "markdown" }
