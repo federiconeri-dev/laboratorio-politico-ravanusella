@@ -371,7 +371,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .hm-title em{font-style:italic}
 #page-home .hm-sub{font-size:clamp(14px,1.7vw,17px);color:#444;max-width:620px;line-height:1.5;padding-bottom:20px;border-bottom:3px double var(--black)}
 #page-home .home-lead-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
-#page-home .home-lead{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(24px,3vw,40px);padding:clamp(28px,4vw,44px) 0;align-items:stretch;border-bottom:3px double var(--black)}
+#page-home .home-lead{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(24px,3vw,40px);padding:clamp(28px,4vw,44px) 0;align-items:start;border-bottom:3px double var(--black)}
 #page-home .hl-hero{cursor:pointer;display:flex;flex-direction:column;transition:background .2s}
 #page-home .hl-hero:hover{background:var(--gray-light)}
 #page-home .hl-ph{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border:2px solid var(--black);background:var(--gray-mid);box-shadow:10px 10px 0 var(--black);transition:box-shadow .22s ease,transform .22s ease}
@@ -394,7 +394,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .hl-byline{font-family:var(--font-mono);font-size:11px;color:var(--gray-dark)}
 #page-home .hl-cta{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #000;padding-bottom:2px}
 #page-home .mm{font-family:var(--font-mono);font-size:11px;color:var(--gray-dark)}
-#page-home .hl-radar{border:2px solid var(--black);display:flex;flex-direction:column;background:#fff;min-height:0}
+#page-home .hl-radar{border:2px solid var(--black);display:flex;flex-direction:column;background:#fff;min-height:0;height:100%;max-height:calc(((100vw - clamp(40px,10vw,120px)) * 1.6 / 2.6) * 10/16 + 240px)}
 #page-home .hl-radar-head{display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:2px solid var(--black);background:var(--black);color:#fff}
 #page-home .hl-dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);animation:pulse 1.8s infinite}
 #page-home .hl-rhtxt{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase}
@@ -410,21 +410,25 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .hl-radar-foot{padding:12px 16px;border-top:2px solid var(--black);font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;text-align:center;cursor:pointer;transition:background .15s}
 #page-home .hl-radar-foot:hover{background:var(--yellow)}
 #page-home .home-rub-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
-#page-home .home-rubriche{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid var(--black)}
-#page-home .hr-label{font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-dark);margin-right:6px}
-#page-home .hr-btn{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;padding:7px 15px;border:1px solid var(--black);background:transparent;transition:background .15s,color .15s;cursor:pointer}
+#page-home .home-rubriche{display:flex;flex-direction:column;gap:0;padding:clamp(32px,4vw,52px) 0 0;border-top:4px solid var(--black)}
+#page-home .hr-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px}
+#page-home .hr-label{font-family:var(--font-display);font-size:clamp(28px,4vw,46px);font-weight:900;letter-spacing:-0.02em;line-height:1;color:var(--black)}
+#page-home .hr-filters{display:flex;gap:6px;flex-wrap:wrap;align-items:center;border-bottom:2px solid var(--black);padding-bottom:14px}
+#page-home .hr-btn{font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border:1.5px solid var(--black);background:transparent;transition:background .15s,color .15s;cursor:pointer}
 #page-home .hr-btn:hover{background:var(--yellow)}
 #page-home .hr-btn.active{background:var(--black);color:#fff}
 #page-home .home-flusso-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
-#page-home .hf-head{font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-dark);padding:clamp(28px,3vw,40px) 0 16px}
-#page-home .home-flusso{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,40px) clamp(20px,2.5vw,32px);padding-bottom:clamp(40px,5vw,60px)}
-#page-home .fcard{cursor:pointer;display:block}
-#page-home .fcard .hl-ph{aspect-ratio:16/9;margin-bottom:22px;box-shadow:7px 7px 0 var(--black)}
+#page-home .hf-head{font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-dark);padding:clamp(24px,3vw,36px) 0 14px;display:flex;align-items:center;gap:12px}
+#page-home .hf-head::before{content:'';flex:1;height:1px;background:var(--gray-mid)}
+#page-home .home-flusso{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3.5vw,48px) clamp(20px,2.5vw,32px);padding:clamp(24px,3vw,36px) 0 clamp(40px,5vw,60px)}
+#page-home .fcard{cursor:pointer;display:block;border-top:2px solid var(--black);padding-top:16px}
+#page-home .fcard .hl-ph{aspect-ratio:16/9;margin-bottom:20px;box-shadow:8px 8px 0 var(--black)}
 #page-home .fcard:hover .hl-ph{box-shadow:3px 3px 0 var(--yellow);transform:translate(4px,4px)}
 #page-home .fcard:hover .hl-ph img{transform:scale(1.04)}
-#page-home .fl-kr{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-#page-home .fl-title{font-family:var(--font-display);font-size:clamp(19px,2vw,23px);font-weight:700;line-height:1.2;margin-bottom:9px}
-#page-home .fl-dek{font-size:14px;color:#555;line-height:1.55;margin-bottom:12px}
+#page-home .fcard:hover .fl-title{text-decoration:underline;text-underline-offset:3px}
+#page-home .fl-kr{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+#page-home .fl-title{font-family:var(--font-display);font-size:clamp(20px,2.1vw,26px);font-weight:900;line-height:1.15;margin-bottom:10px}
+#page-home .fl-dek{font-size:14px;color:#444;line-height:1.6;margin-bottom:14px}
 #page-home .home-empty{font-family:var(--font-mono);font-size:13px;color:var(--gray-dark);padding:20px 0}
 #page-home .home-connect{background:var(--gray-light);border-top:2px solid var(--black);border-bottom:2px solid var(--black)}
 #page-home .hc-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:clamp(28px,3vw,40px) clamp(20px,5vw,60px);max-width:1280px;margin:0 auto}
@@ -489,16 +493,19 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 
   <section class="home-rub-wrap">
     <div class="home-rubriche">
-      <span class="hr-label">Rubriche</span>
-      <button class="hr-btn active" data-f="tutti" onclick="filterHome('tutti',this)">Tutte</button>
-      <button class="hr-btn" data-f="inchiesta" onclick="filterHome('inchiesta',this)">Inchieste</button>
-      <button class="hr-btn" data-f="analisi" onclick="filterHome('analisi',this)">Analisi</button>
-      <button class="hr-btn" data-f="talk" onclick="filterHome('talk',this)">Talk</button>
+      <div class="hr-top">
+        <span class="hr-label">Le pubblicazioni</span>
+      </div>
+      <div class="hr-filters">
+        <button class="hr-btn active" data-f="tutti" onclick="filterHome('tutti',this)">Tutte</button>
+        <button class="hr-btn" data-f="inchiesta" onclick="filterHome('inchiesta',this)">Inchieste</button>
+        <button class="hr-btn" data-f="analisi" onclick="filterHome('analisi',this)">Analisi</button>
+        <button class="hr-btn" data-f="talk" onclick="filterHome('talk',this)">Talk</button>
+      </div>
     </div>
   </section>
 
   <section class="home-flusso-wrap">
-    <div class="hf-head">Le pubblicazioni</div>
     <div class="home-flusso" id="home-flusso"></div>
   </section>
 
