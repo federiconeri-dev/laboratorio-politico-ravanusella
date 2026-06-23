@@ -971,14 +971,9 @@ function renderHomeFeed(atti) {
     { tipo:'albopop',   label:'ALBO',      style:'background:var(--yellow);color:var(--black)',
       items: atti.slice(0,10).map(function(a){ return {data:a.data||'—', testo:a.oggetto||a.tipo||'Atto comunale'}; }) },
     { tipo:'consiglio', label:'CONSIGLIO', style:'border:1px solid #555;color:#555',
-      items: [
-        {data:'Giugno 2026', testo:'Consiglio Comunale di Agrigento — consiglieri e verbali aggiornati'},
-      ]},
+      items: [{data:'Giugno 2026', testo:'Consiglio Comunale — consiglieri e verbali aggiornati'}] },
     { tipo:'medialab',  label:'MEDIA LAB', style:'background:var(--black);color:var(--white)',
-      items: [
-        {data:'Giugno 2026',   testo:'Talk — Laboratorio Politico Ravanusella'},
-        {data:'Dicembre 2025', testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede'},
-      ]},
+      items: MEDIA_ITEMS.map(function(m){ return {data:m.data, testo:m.testo}; }) },
   ];
 
   var counts = {}, result = [], ptrs = fonti.map(function(){ return 0; });
@@ -1105,6 +1100,12 @@ function inviaSegnaLazione() {
   btn.disabled = true; btn.textContent = "Invio in corso...";
   setTimeout(() => { document.getElementById("seg-success").style.display = "block"; btn.style.display = "none"; document.getElementById("seg-messaggio").value = ""; }, 800);
 }
+
+// MEDIA ITEMS - aggiorna qui quando pubblichi nuovi contenuti
+const MEDIA_ITEMS = [
+  { id:'talk-01',             tipo:'medialab', label:'TALK',       data:'Giugno 2026',   testo:'Talk — Laboratorio Politico Ravanusella' },
+  { id:'agrigento-distanza',  tipo:'medialab', label:'CONTRIBUTO', data:'Dicembre 2025', testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede' },
+];
 
 renderConsiglieri();
 fetchAtti();
