@@ -240,7 +240,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   /* BODY */
   body{overflow-x:hidden}
   /* HOME NEWS */
-  #home-news-grid{grid-template-columns:1fr !important}
+  #home-news-grid{grid-template-columns:1fr !important;min-height:auto !important}
   /* NAV */
   nav{padding:0 16px;height:54px}
   .nav-logo-text{display:none}
@@ -359,8 +359,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <div style="max-width:1280px;margin:0 auto;">
       <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px;">Dal Laboratorio</div>
       <h2 style="font-family:var(--font-display);font-size:clamp(28px,4vw,38px);font-weight:900;margin-bottom:clamp(32px,5vw,48px);letter-spacing:-0.02em;">I dati diventano <em>storia.</em></h2>
-      <div id="home-news-grid" style="display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--black);">
-        <!-- generato da renderHomeNews() -->
+      <div id="home-news-grid" style="display:grid;grid-template-columns:3fr 2fr;border:2px solid var(--black);min-height:420px;">
       </div>
       <div id="strumenti-grid" style="display:none">
         <!-- AlboPOP -->
@@ -1115,7 +1114,7 @@ function inviaSegnaLazione() {
 
 // MEDIA ITEMS - aggiorna qui quando pubblichi nuovi contenuti
 const MEDIA_ITEMS = [
-  { id:'talk-01', mcat:'talk', tipo:'Talk', data:'Giugno 2026', dur:'~2 ore', testo:'Elezioni Comunali Agrigento - 2026 Analisi del voto', desc:'AFFINITÀ E DIVERGENZE TRA NOI E IL COMPAGNO ROBERTO DI MAURO. Dal 1993 a oggi sono passati trentatré anni. Proveremo a fare un\'analisi del voto: convergenze e divergenze tra il 1993 e il 2026.', autore:'Mauro Indelicato, Gaetano Gucciardo, Giacomo La Russa, Marcy Palillo' },
+  { id:'talk-01', mcat:'talk', tipo:'Talk', data:'Giugno 2026', dur:'~2 ore', youtube:'gpv8ACqCScc', testo:'Elezioni Comunali Agrigento - 2026 Analisi del voto', desc:'AFFINITÀ E DIVERGENZE TRA NOI E IL COMPAGNO ROBERTO DI MAURO. Dal 1993 a oggi sono passati trentatré anni. Proveremo a fare un\'analisi del voto: convergenze e divergenze tra il 1993 e il 2026.', autore:'Mauro Indelicato, Gaetano Gucciardo, Giacomo La Russa, Marcy Palillo' },
   { id:'agrigento-distanza', mcat:'contributo', tipo:'Contributo', data:'Dicembre 2025', dur:'8 min',   testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede', desc:'Una ricerca qualitativa su 200 fuorisede agrigentini tra 18 e 40 anni.', autore:'Francesco Trupia' },
 ];
 
@@ -1156,33 +1155,35 @@ function renderHomeNews() {
   var primo = MEDIA_ITEMS[0];
   var resto = MEDIA_ITEMS.slice(1, 4);
 
-  var badgeStyle = primo.mcat === 'talk'
-    ? 'background:var(--black);color:var(--white)'
-    : 'background:var(--yellow);color:var(--black)';
+  // Badge style
+  function badge(m) {
+    var bg = m.mcat === 'talk' ? 'background:var(--black);color:var(--white)' : 'background:var(--yellow);color:var(--black)';
+    return '<span style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.08em;padding:3px 8px;' + bg + '">' + m.tipo.toUpperCase() + '</span>';
+  }
 
-  var leftCol = '<div onclick="showArticolo(\'' + primo.id + '\')" style="padding:clamp(28px,4vw,48px);border-right:2px solid var(--black);cursor:pointer;transition:background 0.2s;display:flex;flex-direction:column;justify-content:space-between;" onmouseover="this.style.background=\'var(--yellow)\'" onmouseout="this.style.background=\'\'">'
+  // Thumbnail YouTube se disponibile
+  var thumbUrl = primo.youtube ? 'https://img.youtube.com/vi/' + primo.youtube + '/maxresdefault.jpg' : null;
+  var thumbHtml = thumbUrl
+    ? '<div style="width:100%;aspect-ratio:16/9;overflow:hidden;border-bottom:2px solid var(--black);"><img src="' + thumbUrl + '" style="width:100%;height:100%;object-fit:cover;" alt="' + primo.testo + '"></div>'
+    : '';
+
+  var leftCol = '<div onclick="showArticolo(\'' + primo.id + '\')" style="cursor:pointer;display:flex;flex-direction:column;border-right:2px solid var(--black);transition:background 0.2s;" onmouseover="this.style.background=\'var(--gray-light)\'" onmouseout="this.style.background=\'\'">'
+    + thumbHtml
+    + '<div style="padding:clamp(24px,3vw,36px);flex:1;display:flex;flex-direction:column;justify-content:space-between;">'
     + '<div>'
-    + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">'
-    + '<span style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.1em;padding:3px 8px;' + badgeStyle + '">' + primo.tipo.toUpperCase() + '</span>'
-    + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">▶ ' + primo.dur + '</span>'
-    + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">' + primo.data + '</span>'
+    + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">' + badge(primo) + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">▶ ' + primo.dur + '</span><span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">' + primo.data + '</span></div>'
+    + '<h3 style="font-family:var(--font-display);font-size:clamp(20px,2.5vw,30px);font-weight:700;line-height:1.15;margin-bottom:12px;letter-spacing:-0.01em;">' + primo.testo + '</h3>'
+    + '<p style="font-size:13px;color:#555;line-height:1.6;margin-bottom:16px;">' + primo.desc + '</p>'
     + '</div>'
-    + '<h3 style="font-family:var(--font-display);font-size:clamp(22px,3vw,34px);font-weight:700;line-height:1.15;margin-bottom:16px;letter-spacing:-0.01em;">' + primo.testo + '</h3>'
-    + '<p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:24px;">' + primo.desc + '</p>'
-    + '</div>'
-    + '<span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Guarda →</span>'
-    + '</div>';
+    + '<span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-dark);">Guarda →</span>'
+    + '</div></div>';
 
-  var rightCol = '<div style="display:flex;flex-direction:column;border-left:0;">'
+  var rightCol = '<div style="display:flex;flex-direction:column;">'
     + resto.map(function(m, i) {
-        var bs = m.mcat === 'talk' ? 'background:var(--black);color:var(--white)' : 'background:var(--yellow);color:var(--black)';
         var border = i < resto.length - 1 ? 'border-bottom:2px solid var(--black);' : '';
-        return '<div onclick="showArticolo(\'' + m.id + '\')" style="padding:clamp(20px,3vw,32px);' + border + 'cursor:pointer;transition:background 0.2s;flex:1;" onmouseover="this.style.background=\'var(--yellow)\'" onmouseout="this.style.background=\'\'">'
-          + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">'
-          + '<span style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.1em;padding:3px 8px;' + bs + '">' + m.tipo.toUpperCase() + '</span>'
-          + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">' + m.data + '</span>'
-          + '</div>'
-          + '<h4 style="font-family:var(--font-display);font-size:clamp(17px,2vw,22px);font-weight:700;line-height:1.25;margin-bottom:8px;">' + m.testo + '</h4>'
+        return '<div onclick="showArticolo(\'' + m.id + '\')" style="padding:clamp(20px,2.5vw,28px);' + border + 'cursor:pointer;flex:1;transition:background 0.2s;" onmouseover="this.style.background=\'var(--gray-light)\'" onmouseout="this.style.background=\'\'">'
+          + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">' + badge(m) + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">' + m.data + '</span></div>'
+          + '<h4 style="font-family:var(--font-display);font-size:clamp(16px,1.8vw,20px);font-weight:700;line-height:1.25;margin-bottom:8px;">' + m.testo + '</h4>'
           + '<p style="font-size:13px;color:#666;line-height:1.5;">' + m.desc + '</p>'
           + '</div>';
       }).join('')
