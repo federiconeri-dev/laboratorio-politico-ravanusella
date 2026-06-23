@@ -447,8 +447,17 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   </div>
   <div class="nav-links">
     <a class="nav-link active" id="nav-home" onclick="showPage('home')">News</a>
-    <a class="nav-link" id="nav-albopop" onclick="showPage('albopop')">AlboPOP</a>
-    <a class="nav-link" id="nav-consiglio" onclick="showPage('consiglio')">Consiglio</a>
+
+    <div class="nav-dropdown" id="nav-monitoraggio-wrap">
+      <a class="nav-link" id="nav-monitoraggio" onclick="toggleMonitoraggio(event)">
+        Monitoraggio <span class="nav-caret">▾</span>
+      </a>
+      <div class="nav-dropdown-menu" id="nav-monitoraggio-menu">
+        <a onclick="showPage('albopop'); closeMonitoraggio()">AlboPOP</a>
+        <a onclick="showPage('consiglio'); closeMonitoraggio()">Consiglio</a>
+      </div>
+    </div>
+
     <a class="nav-link" id="nav-eventi" onclick="showPage('eventi')">Eventi</a>
     <a class="nav-link" id="nav-segnalazioni" onclick="showPage('segnalazioni')">Proposte</a>
   </div>
