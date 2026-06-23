@@ -239,6 +239,8 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 @media(max-width:960px){
   /* BODY */
   body{overflow-x:hidden}
+  /* HOME NEWS */
+  #home-news-grid{grid-template-columns:1fr !important}
   /* NAV */
   nav{padding:0 16px;height:54px}
   .nav-logo-text{display:none}
@@ -352,12 +354,15 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     </div>
   </section>
 
-  <!-- SEZIONI GRID -->
-  <section style="padding:clamp(48px,6vw,80px) clamp(20px,5vw,60px);border-bottom:2px solid var(--black);">
+  <!-- MEDIA NEWS SECTION -->
+  <section id="home-news-section" style="padding:clamp(48px,6vw,80px) clamp(20px,5vw,60px);border-bottom:2px solid var(--black);">
     <div style="max-width:1280px;margin:0 auto;">
-      <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px;">Strumenti</div>
-      <h2 style="font-family:var(--font-display);font-size:clamp(28px,4vw,38px);font-weight:900;margin-bottom:clamp(32px,5vw,56px);letter-spacing:-0.02em;">Il laboratorio civico</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--black);" id="strumenti-grid">
+      <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px;">Dal Laboratorio</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(28px,4vw,38px);font-weight:900;margin-bottom:clamp(32px,5vw,48px);letter-spacing:-0.02em;">I dati diventano <em>storia.</em></h2>
+      <div id="home-news-grid" style="display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--black);">
+        <!-- generato da renderHomeNews() -->
+      </div>
+      <div id="strumenti-grid" style="display:none">
         <!-- AlboPOP -->
         <div class="strumento-q" onclick="showPage('albopop')" style="padding:48px;border-right:2px solid var(--black);border-bottom:2px solid var(--black);background:var(--white);cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--yellow)'" onmouseout="this.style.background='var(--white)'">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:16px;opacity:0.7;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -1144,7 +1149,50 @@ function filterMedia(cat, btn) {
   renderMediaGrid(cat);
 }
 
+function renderHomeNews() {
+  var grid = document.getElementById("home-news-grid");
+  if (!grid || !MEDIA_ITEMS.length) return;
+
+  var primo = MEDIA_ITEMS[0];
+  var resto = MEDIA_ITEMS.slice(1, 4);
+
+  var badgeStyle = primo.mcat === 'talk'
+    ? 'background:var(--black);color:var(--white)'
+    : 'background:var(--yellow);color:var(--black)';
+
+  var leftCol = '<div onclick="showArticolo(\'' + primo.id + '\')" style="padding:clamp(28px,4vw,48px);border-right:2px solid var(--black);cursor:pointer;transition:background 0.2s;display:flex;flex-direction:column;justify-content:space-between;" onmouseover="this.style.background=\'var(--yellow)\'" onmouseout="this.style.background=\'\'">'
+    + '<div>'
+    + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">'
+    + '<span style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.1em;padding:3px 8px;' + badgeStyle + '">' + primo.tipo.toUpperCase() + '</span>'
+    + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">▶ ' + primo.dur + '</span>'
+    + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">' + primo.data + '</span>'
+    + '</div>'
+    + '<h3 style="font-family:var(--font-display);font-size:clamp(22px,3vw,34px);font-weight:700;line-height:1.15;margin-bottom:16px;letter-spacing:-0.01em;">' + primo.testo + '</h3>'
+    + '<p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:24px;">' + primo.desc + '</p>'
+    + '</div>'
+    + '<span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Guarda →</span>'
+    + '</div>';
+
+  var rightCol = '<div style="display:flex;flex-direction:column;border-left:0;">'
+    + resto.map(function(m, i) {
+        var bs = m.mcat === 'talk' ? 'background:var(--black);color:var(--white)' : 'background:var(--yellow);color:var(--black)';
+        var border = i < resto.length - 1 ? 'border-bottom:2px solid var(--black);' : '';
+        return '<div onclick="showArticolo(\'' + m.id + '\')" style="padding:clamp(20px,3vw,32px);' + border + 'cursor:pointer;transition:background 0.2s;flex:1;" onmouseover="this.style.background=\'var(--yellow)\'" onmouseout="this.style.background=\'\'">'
+          + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">'
+          + '<span style="font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.1em;padding:3px 8px;' + bs + '">' + m.tipo.toUpperCase() + '</span>'
+          + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);">' + m.data + '</span>'
+          + '</div>'
+          + '<h4 style="font-family:var(--font-display);font-size:clamp(17px,2vw,22px);font-weight:700;line-height:1.25;margin-bottom:8px;">' + m.testo + '</h4>'
+          + '<p style="font-size:13px;color:#666;line-height:1.5;">' + m.desc + '</p>'
+          + '</div>';
+      }).join('')
+    + '</div>';
+
+  grid.innerHTML = leftCol + rightCol;
+}
+
 renderConsiglieri();
+renderHomeNews();
 renderMediaGrid('tutti');
 fetchAtti();
 
