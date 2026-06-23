@@ -366,8 +366,10 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .home-lead{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(24px,3vw,40px);padding:clamp(28px,4vw,44px) 0;align-items:stretch;border-bottom:3px double var(--black)}
 #page-home .hl-hero{cursor:pointer;display:flex;flex-direction:column;transition:background .2s}
 #page-home .hl-hero:hover{background:var(--gray-light)}
-#page-home .hl-ph{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border:1px solid var(--black);background:var(--gray-mid)}
+#page-home .hl-ph{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;border:2px solid var(--black);background:var(--gray-mid);box-shadow:10px 10px 0 var(--black);transition:box-shadow .22s ease,transform .22s ease}
 #page-home .hl-ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+#page-home .hl-hero:hover{background:transparent}
+#page-home .hl-hero:hover .hl-ph{box-shadow:5px 5px 0 var(--yellow);transform:translate(4px,4px)}
 #page-home .hl-hero:hover .hl-ph img{transform:scale(1.04)}
 #page-home .hl-ph.fb::after{content:'LP';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:42px;color:var(--gray-dark);background:repeating-linear-gradient(45deg,var(--gray-mid),var(--gray-mid)10px,#dcdcd6 10px,#dcdcd6 20px)}
 #page-home .ph-cat{position:absolute;top:0;left:0;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 9px}
@@ -409,7 +411,8 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .hf-head{font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-dark);padding:clamp(28px,3vw,40px) 0 16px}
 #page-home .home-flusso{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,40px) clamp(20px,2.5vw,32px);padding-bottom:clamp(40px,5vw,60px)}
 #page-home .fcard{cursor:pointer;display:block}
-#page-home .fcard .hl-ph{aspect-ratio:16/9;margin-bottom:14px}
+#page-home .fcard .hl-ph{aspect-ratio:16/9;margin-bottom:22px;box-shadow:7px 7px 0 var(--black)}
+#page-home .fcard:hover .hl-ph{box-shadow:3px 3px 0 var(--yellow);transform:translate(4px,4px)}
 #page-home .fcard:hover .hl-ph img{transform:scale(1.04)}
 #page-home .fl-kr{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 #page-home .fl-title{font-family:var(--font-display);font-size:clamp(19px,2vw,23px);font-weight:700;line-height:1.2;margin-bottom:9px}
@@ -443,7 +446,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <span class="nav-logo-text">Laboratorio Politico Ravanusella</span>
   </div>
   <div class="nav-links">
-    <a class="nav-link active" id="nav-home" onclick="showPage('home')">Home</a>
+    <a class="nav-link active" id="nav-home" onclick="showPage('home')">News</a>
     <a class="nav-link" id="nav-albopop" onclick="showPage('albopop')">AlboPOP</a>
     <a class="nav-link" id="nav-consiglio" onclick="showPage('consiglio')">Consiglio</a>
     <a class="nav-link" id="nav-eventi" onclick="showPage('eventi')">Eventi</a>
@@ -545,7 +548,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   <footer>
     <div class="footer-grid">
       <div><div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;"><div class="nav-logo-badge">LP</div><span class="footer-brand-name">Laboratorio Politico Ravanusella</span></div><p class="footer-brand-desc">Monitoraggio civico del Consiglio Comunale di Agrigento.</p></div>
-      <div><p class="footer-col-title">Navigazione</p><a class="footer-link" onclick="showPage('home')">Home</a><a class="footer-link" onclick="showPage('consiglio')">Consiglio</a><a class="footer-link" onclick="showPage('segnalazioni')">Segnalazioni</a></div>
+      <div><p class="footer-col-title">Navigazione</p><a class="footer-link" onclick="showPage('home')">News</a><a class="footer-link" onclick="showPage('consiglio')">Consiglio</a><a class="footer-link" onclick="showPage('segnalazioni')">Segnalazioni</a></div>
       <div><p class="footer-col-title">Canali</p><a class="footer-link" href="https://t.me/albopretorioxpigri" target="_blank">Telegram @albopretorioxpigri</a></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Laboratorio Politico Ravanusella</span><span>La trasparenza non è un favore, è un diritto.</span></div>
@@ -681,7 +684,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 <!-- ══ ARTICOLO: AGRIGENTO A DISTANZA ══ -->
 <div class="page" id="page-articolo-agrigento-distanza">
   <div class="articolo-wrap">
-    <button class="articolo-back" onclick="showPage('home')">← Il giornale</button>
+    <button class="articolo-back" onclick="showPage('home')">← Le news</button>
     <div class="articolo-tipo">Contributo</div>
     <h1 class="articolo-title">Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede</h1>
     <div class="articolo-meta">
@@ -900,7 +903,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 <!-- ══ TALK 01 ══ -->
 <div class="page" id="page-articolo-talk-01">
   <div class="articolo-wrap" style="max-width:900px">
-    <button class="articolo-back" onclick="showPage('home')">← Il giornale</button>
+    <button class="articolo-back" onclick="showPage('home')">← Le news</button>
     <div class="articolo-tipo">Talk</div>
     <h1 class="articolo-title">Elezioni Comunali Agrigento — 2026 Analisi del voto</h1>
     <div class="articolo-meta">
