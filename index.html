@@ -403,7 +403,12 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .hl-byline{font-family:var(--font-mono);font-size:11px;color:var(--gray-dark)}
 #page-home .hl-cta{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:2px solid #000;padding-bottom:2px}
 #page-home .mm{font-family:var(--font-mono);font-size:11px;color:var(--gray-dark)}
-#page-home .hl-radar{border:2px solid var(--black);display:flex;flex-direction:column;background:#fff;min-height:0;height:auto;max-height:calc((min(100vw, 1280px) - clamp(40px, 10vw, 120px) - 16px) * 1.6 / 2.6 * 9 / 16 + 190px)}
+#page-home .hl-radar{position:relative;border:2px solid var(--black);background:#fff}
+#page-home .hl-radar-inner{display:flex;flex-direction:column;min-height:0;max-height:calc((min(100vw, 1280px) - clamp(40px, 10vw, 120px) - 16px) * 1.6 / 2.6 * 9 / 16 + 190px)}
+@media(min-width:961px){
+  #page-home .home-lead{align-items:stretch}
+  #page-home .hl-radar-inner{position:absolute;inset:0;max-height:none}
+}
 #page-home .hl-radar-head{display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:2px solid var(--black);background:var(--black);color:#fff}
 #page-home .hl-dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);animation:pulse 1.8s infinite}
 #page-home .hl-rhtxt{font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase}
@@ -493,9 +498,11 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <div class="home-lead">
       <div class="hl-hero" id="home-hero"></div>
       <aside class="hl-radar">
+        <div class="hl-radar-inner">
         <div class="hl-radar-head"><span class="hl-dot"></span><span class="hl-rhtxt">Civic Radar</span><span class="hl-rlive">In diretta</span></div>
         <div class="hl-radar-scroll"><div id="home-feed"><div class="radar-it"><div class="radar-it-txt" style="color:var(--gray-dark)">Caricamento…</div></div></div></div>
         <div class="hl-radar-foot" onclick="showPage('albopop')">Apri l'archivio dell'albo →</div>
+        </div>
       </aside>
     </div>
   </section>
