@@ -394,6 +394,13 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 #page-home .ph-cat.analisi{background:var(--yellow);color:#000}
 #page-home .ph-cat.inchiesta{background:#000;color:#fff}
 #page-home .ph-cat.contributo{background:var(--yellow);color:#000}
+#page-home .tcat{display:inline-block;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border:1.5px solid var(--black);line-height:1.4}
+#page-home .tcat.talk{background:#fff;color:#000}
+#page-home .tcat.analisi{background:var(--yellow);color:#000}
+#page-home .tcat.inchiesta{background:#000;color:#fff}
+#page-home .tcat.contributo{background:var(--yellow);color:#000}
+.av-mono{font-family:var(--font-display);font-weight:900;font-size:clamp(30px,4.5vw,46px);letter-spacing:-0.02em;color:#b4b4ae}
+.av-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 #page-home .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
 #page-home .play span{width:60px;height:60px;border-radius:50%;background:rgba(10,10,10,.82);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;padding-left:4px}
 #page-home .hl-kr{display:flex;align-items:center;gap:12px;margin:16px 0 12px}
@@ -456,6 +463,33 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   #page-home .home-flusso{grid-template-columns:1fr}
 }
 
+/* ===== HAMBURGER / MENU MOBILE ===== */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:38px;padding:0 9px;background:none;border:none;cursor:pointer}
+.nav-burger span{display:block;height:2px;width:100%;background:var(--black);transition:transform .25s,opacity .2s}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:640px){
+  .nav-burger{display:flex}
+  .nav-logo-text{display:block;font-size:clamp(11px,3vw,14px);white-space:nowrap}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--white);border-bottom:2px solid var(--black);box-shadow:0 10px 24px rgba(0,0,0,.12);
+    overflow:visible;max-height:calc(100vh - 54px);overflow-y:auto;
+    transform:translateY(-10px);opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .2s,transform .2s,visibility .2s}
+  .nav-links.open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
+  .nav-link{padding:16px 22px;font-size:14px;border:none;border-bottom:1px solid var(--gray-mid);white-space:normal;width:100%}
+  .nav-link.active{background:var(--black);color:var(--white)}
+  .nav-caret{display:none}
+  #nav-monitoraggio{pointer-events:none;color:var(--gray-dark);font-size:11px;letter-spacing:0.14em;padding-bottom:6px;border-bottom:none}
+  .nav-dropdown{position:static}
+  .nav-dropdown-menu{position:static!important;display:block!important;border:none!important;box-shadow:none!important;min-width:0;background:var(--gray-light)}
+  .nav-dropdown-menu a{padding:15px 22px 15px 38px;border-bottom:1px solid var(--gray-mid);font-size:14px}
+  .nav-dropdown-menu a:hover{background:var(--yellow)}
+}
+
 </style>
 </head>
 <body>
@@ -469,9 +503,9 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 <nav>
   <div class="nav-logo" onclick="showPage('home')">
     <div class="nav-logo-badge">LP</div>
-    <span class="nav-logo-text">Laboratorio Politico Ravanusella</span>
+    <span class="nav-logo-text">Laboratorio Politico<span class="nav-logo-extra"> Ravanusella</span></span>
   </div>
-  <div class="nav-links">
+  <div class="nav-links" id="nav-links">
     <a class="nav-link active" id="nav-home" onclick="showPage('home')">News</a>
 
     <div class="nav-dropdown" id="nav-monitoraggio-wrap">
@@ -487,6 +521,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     <a class="nav-link" id="nav-eventi" onclick="showPage('eventi')">Eventi</a>
     <a class="nav-link" id="nav-segnalazioni" onclick="showPage('segnalazioni')">Proposte</a>
   </div>
+  <button class="nav-burger" id="nav-burger" onclick="toggleBurger(event)" aria-label="Apri menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ══ HOME ══ -->
@@ -1027,7 +1062,7 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 <!-- ══ EVENTI ══ -->
 <style>
 #page-eventi .evp-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
-#page-eventi .evp-head{padding:clamp(36px,5vw,64px) 0 clamp(24px,3vw,36px)}
+#page-eventi .evp-head{padding-top:clamp(36px,5vw,64px);padding-bottom:clamp(24px,3vw,36px)}
 #page-eventi .evp-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:14px}
 #page-eventi .evp-title{font-family:var(--font-display);font-size:clamp(52px,10vw,116px);font-weight:900;line-height:0.86;letter-spacing:-0.03em}
 #page-eventi .evp-title em{font-style:italic}
@@ -1142,10 +1177,48 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
 
 
 <script>
-const API = "https://fede97.pythonanywhere.com/api/albo";
-let tuttiGliAtti = [];
-let filtroCorrente = "tutti";
+/* ============================================================
+   LABORATORIO POLITICO RAVANUSELLA
+   MAPPA (cerca con Ctrl+F):
+     [1] CONTENUTI DA AGGIORNARE  <- eventi, consiglieri, media
+     [2] IMPOSTAZIONI   [3] RENDERING   [4] NAVIGAZIONE
+     [5] CALENDARIO     [6] AVVIO
+   ============================================================ */
 
+/* ===================== [1] CONTENUTI DA AGGIORNARE ===================== */
+
+/* -- MEDIA LAB: talk / analisi / inchieste / contributi (il primo della lista e' l'articolo grande in Home) -- */
+const MEDIA_ITEMS = [
+  { id:'talk-01', mcat:'talk', tipo:'Talk', data:'Giugno 2026', dur:'~2 ore', youtube:'gpv8ACqCScc', testo:'Elezioni Comunali Agrigento - 2026 Analisi del voto', desc:'AFFINITÀ E DIVERGENZE TRA NOI E IL COMPAGNO ROBERTO DI MAURO. Dal 1993 a oggi sono passati trentatré anni. Proveremo a fare un\'analisi del voto: convergenze e divergenze tra il 1993 e il 2026.', autore:'Mauro Indelicato, Gaetano Gucciardo, Giacomo La Russa, Marcy Palillo' },
+  { id:'agrigento-distanza', mcat:'analisi', tipo:'Analisi', data:'Dicembre 2025', dur:'8 min',   testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede', desc:'Una ricerca qualitativa su 200 fuorisede agrigentini tra 18 e 40 anni.', autore:'Francesco Trupia' },
+];
+
+/* -- EVENTI IN ARRIVO -- */
+const EVENTI_FUTURI = [
+  { id:'rifiuti', day:'04', mon:'Luglio', yr:'2026', kind:'Tavola rotonda',
+    title:'La gestione dei rifiuti ad Agrigento',
+    info:['🕖 Ore 19:00', '📍 Scaro Cafè', 'Criticità attuali e prospettive future'],
+    flyer:'', /* ← inserire qui l'URL della locandina, es: 'assets/locandina-rifiuti.jpg' */
+    ics:{ dtstart:'20260704T170000Z', dtend:'20260704T200000Z', summary:'La gestione dei rifiuti ad Agrigento', location:'Scaro Cafè, Agrigento', description:'Una tavola rotonda civica e tecnica sulla gestione dei rifiuti.' } },
+  { id:'restare', day:'18', mon:'Luglio', yr:'2026', kind:'Presentazione',
+    title:'Non restiamo senza — PattoXrestare',
+    info:['🕖 Ore 19:30', '📍 Scaro Cafè', 'Campagna del PattoXrestare'],
+    flyer:'', /* ← inserire qui l'URL della locandina */
+    ics:{ dtstart:'20260718T173000Z', dtend:'20260718T203000Z', summary:'Non restiamo senza — PattoXrestare', location:'Scaro Cafè, Agrigento', description:'Presentazione della campagna PattoXrestare: una piattaforma di proposte concrete per una Sicilia dove restare è una scelta possibile.' } },
+];
+
+/* -- EVENTI PASSATI (archivio) -- */
+const EVENTI_PASSATI = [
+  { day:'14', mon:'Giugno', yr:'2026', kind:'Talk',
+    title:'Analisi del voto: comunali 2026',
+    place:'📍 Scaro Cafè · ore 20:30',
+    articoli:[
+      {id:'talk-01', ic:'🎙', tt:'Elezioni 2026: analisi del voto'},
+      {id:'agrigento-distanza', ic:'📊', tt:'La diaspora che vota'}
+    ] },
+];
+
+/* -- CONSIGLIO COMUNALE - per la foto aggiungi  foto:'assets/foto/nome.jpg' -- */
 const CONSIGLIERI = [
   { nome:"Giampiero Carta", lista:"Partito Democratico", voti:435, schieramento:"filo-giunta" },
   { nome:"Sandro Fanara", lista:"Partito Democratico", voti:430, schieramento:"filo-giunta" },
@@ -1173,8 +1246,18 @@ const CONSIGLIERI = [
   { nome:"Dino Alonge", lista:"Centro-destra (lista da confermare)", voti:null, schieramento:"opposizione", nota:"Candidato sindaco del centro-destra, sconfitto al ballottaggio" },
 ];
 
-const svg = ``;
+/* ===================== [2] IMPOSTAZIONI ===================== */
+const API = "https://fede97.pythonanywhere.com/api/albo";
+let tuttiGliAtti = [];
+let filtroCorrente = "tutti";
 
+
+const svg = ``;
+function tbadge(m){ return '<span class="tcat '+(m.mcat||'')+'">'+(m.tipo||'').toUpperCase()+'</span>'; }
+function initials(nome){ var p=(nome||'').trim().split(/\s+/); return ((p[0]?p[0][0]:'')+(p.length>1?p[p.length-1][0]:'')).toUpperCase(); }
+function avatar(c){ var nome=c?(c.nome||''):''; var mono='<span class="av-mono">'+initials(nome)+'</span>'; if(c&&c.foto){ return mono+'<img src="'+c.foto+'" alt="'+nome+'" class="av-img" loading="lazy" onerror="this.remove()">'; } return mono; }
+
+/* ===================== [3] RENDERING ===================== */
 function renderConsiglieri() {
   const grid = document.getElementById("consiglieri-grid");
   const schede = document.getElementById("schede-container");
@@ -1183,8 +1266,8 @@ function renderConsiglieri() {
 
   function card(c, i) {
     return `<div onclick="showScheda(${i})" style="border:2px solid var(--black);cursor:pointer;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='var(--black)';this.style.color='var(--white)';this.querySelector('.card-party').style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.background='';this.style.color='';this.querySelector('.card-party').style.color=''">
-      <div style="aspect-ratio:3/4;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-        ${svg}
+      <div style="position:relative;aspect-ratio:3/4;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        ${avatar(c)}
       </div>
       <div style="padding:16px;border-top:2px solid var(--black);">
         <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;border:1px solid currentColor;padding:2px 6px;display:inline-block;margin-bottom:8px;">${c.schieramento === 'filo-giunta' ? 'Filo-giunta' : 'Opposizione'}</span>
@@ -1219,8 +1302,8 @@ function renderConsiglieri() {
     <div class="scheda-wrap" id="scheda-${i}">
       <button class="scheda-back" onclick="closeScheda(${i})">← Consiglio Comunale</button>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,48px);margin-bottom:64px;">
-        <div style="border:2px solid var(--black);aspect-ratio:3/4;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;">
-          ${svg}
+        <div style="position:relative;border:2px solid var(--black);aspect-ratio:3/4;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          ${avatar(c)}
         </div>
         <div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
@@ -1347,6 +1430,7 @@ function showArticolo(id) {
   window.scrollTo(0,0);
 }
 
+/* ===================== [4] NAVIGAZIONE E INTERAZIONI ===================== */
 function showPage(name) {
   document.querySelectorAll(".page").forEach(p => {
     p.classList.remove("active");
@@ -1357,6 +1441,7 @@ function showPage(name) {
   pg.classList.add("active");
   pg.style.animation = "";
   closeMonitoraggio();
+  closeBurger();
   if(name === 'albopop' || name === 'consiglio'){
     var nm = document.getElementById('nav-monitoraggio'); if(nm) nm.classList.add('active');
   } else {
@@ -1412,10 +1497,6 @@ function inviaSegnaLazione() {
 }
 
 // MEDIA ITEMS - aggiorna qui quando pubblichi nuovi contenuti
-const MEDIA_ITEMS = [
-  { id:'talk-01', mcat:'talk', tipo:'Talk', data:'Giugno 2026', dur:'~2 ore', youtube:'gpv8ACqCScc', testo:'Elezioni Comunali Agrigento - 2026 Analisi del voto', desc:'AFFINITÀ E DIVERGENZE TRA NOI E IL COMPAGNO ROBERTO DI MAURO. Dal 1993 a oggi sono passati trentatré anni. Proveremo a fare un\'analisi del voto: convergenze e divergenze tra il 1993 e il 2026.', autore:'Mauro Indelicato, Gaetano Gucciardo, Giacomo La Russa, Marcy Palillo' },
-  { id:'agrigento-distanza', mcat:'analisi', tipo:'Analisi', data:'Dicembre 2025', dur:'8 min',   testo:'Agrigento a Distanza — Identità, Istanze e Prospettive dei Fuorisede', desc:'Una ricerca qualitativa su 200 fuorisede agrigentini tra 18 e 40 anni.', autore:'Francesco Trupia' },
-];
 
 function renderMediaGrid(filtro) {
   var grid = document.getElementById("media-grid");
@@ -1459,7 +1540,7 @@ function homePhoto(m){
 }
 function heroHTML(m){
   return homePhoto(m)
-    + '<div class="hl-kr"><span class="mm">'+(m.tipo||'').toUpperCase()+'</span><span class="mm">&#9654; '+m.dur+'</span><span class="mm">'+m.data+'</span></div>'
+    + '<div class="hl-kr">'+tbadge(m)+'<span class="mm">&#9654; '+m.dur+'</span><span class="mm">'+m.data+'</span></div>'
     + '<h2 class="hl-title">'+m.testo+'</h2>'
     + '<p class="hl-dek">'+(m.desc||'')+'</p>'
     + '<div class="hl-foot"><span class="hl-byline">'+(m.autore||'')+'</span><span class="hl-cta">'+(m.mcat==='talk'?'Guarda':'Leggi')+' &rarr;</span></div>';
@@ -1467,7 +1548,7 @@ function heroHTML(m){
 function cardHTML(m){
   return '<a class="fcard" onclick="showArticolo(\''+m.id+'\')">'
     + homePhoto(m)
-    + '<div class="fl-kr"><span class="mm">'+m.dur+'</span></div>'
+    + '<div class="fl-kr">'+tbadge(m)+'<span class="mm">&#9654; '+m.dur+'</span></div>'
     + '<h3 class="fl-title">'+m.testo+'</h3>'
     + '<p class="fl-dek">'+(m.desc||'')+'</p>'
     + '<span class="mm">'+(m.autore||'')+' &middot; '+m.data+'</span>'
@@ -1498,27 +1579,6 @@ function filterHome(cat, btn){
 }
 
 /* ── EVENTI ── */
-const EVENTI_FUTURI = [
-  { id:'rifiuti', day:'04', mon:'Luglio', yr:'2026', kind:'Tavola rotonda',
-    title:'La gestione dei rifiuti ad Agrigento',
-    info:['🕖 Ore 19:00', '📍 Scaro Cafè', 'Criticità attuali e prospettive future'],
-    flyer:'', /* ← inserire qui l'URL della locandina, es: 'assets/locandina-rifiuti.jpg' */
-    ics:{ dtstart:'20260704T170000Z', dtend:'20260704T200000Z', summary:'La gestione dei rifiuti ad Agrigento', location:'Scaro Cafè, Agrigento', description:'Una tavola rotonda civica e tecnica sulla gestione dei rifiuti.' } },
-  { id:'restare', day:'18', mon:'Luglio', yr:'2026', kind:'Presentazione',
-    title:'Non restiamo senza — PattoXrestare',
-    info:['🕖 Ore 19:30', '📍 Scaro Cafè', 'Campagna del PattoXrestare'],
-    flyer:'', /* ← inserire qui l'URL della locandina */
-    ics:{ dtstart:'20260718T173000Z', dtend:'20260718T203000Z', summary:'Non restiamo senza — PattoXrestare', location:'Scaro Cafè, Agrigento', description:'Presentazione della campagna PattoXrestare: una piattaforma di proposte concrete per una Sicilia dove restare è una scelta possibile.' } },
-];
-const EVENTI_PASSATI = [
-  { day:'14', mon:'Giugno', yr:'2026', kind:'Talk',
-    title:'Analisi del voto: comunali 2026',
-    place:'📍 Scaro Cafè · ore 20:30',
-    articoli:[
-      {id:'talk-01', ic:'🎙', tt:'Elezioni 2026: analisi del voto'},
-      {id:'agrigento-distanza', ic:'📊', tt:'La diaspora che vota'}
-    ] },
-];
 
 function renderLocandine(){
   EVENTI_FUTURI.forEach(function(e){
@@ -1578,49 +1638,95 @@ function renderEventi(){
   }).join('') + '</div>';
 }
 
+/* ===================== [5] CALENDARIO (.ics) ===================== */
 function downloadICS(id) {
   var e = EVENTI_FUTURI.find(function(x){ return x.id === id; });
   if (!e || !e.ics) return;
   var c = e.ics;
-  var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  if (isMobile) {
-    // Su mobile: apri Google Calendar che precompila l'evento (il file .ics spesso non viene letto)
-    var url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && 'ontouchend' in document);
+  var isAndroid = /Android/i.test(ua);
+  var isMobile = isIOS || isAndroid || /Mobile/i.test(ua);
+
+  // DESKTOP: pagina "Aggiungi evento" di Google Calendar (precompilata)
+  if (!isMobile) {
+    var gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent(c.summary)
       + '&dates=' + c.dtstart + '/' + c.dtend
       + '&details=' + encodeURIComponent(c.description || '')
       + '&location=' + encodeURIComponent(c.location || '');
-    window.open(url, '_blank');
+    var w = window.open(gcal, '_blank');
+    if (!w) window.location.href = gcal;
     return;
   }
-  // Su desktop: scarica il file .ics standard
-  var content = [
-    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Laboratorio Ravanusella//IT',
+
+  // MOBILE: file .ics valido -> apre l'app calendario del telefono
+  function pad(n){ return (n<10?'0':'')+n; }
+  var d = new Date();
+  var stamp = d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';
+  function esc(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+  var ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Laboratorio Ravanusella//IT','CALSCALE:GREGORIAN','METHOD:PUBLISH',
     'BEGIN:VEVENT',
+    'UID:'+(id||'evento')+'-'+stamp+'@ravanusella',
+    'DTSTAMP:'+stamp,
     'DTSTART:'+c.dtstart,
     'DTEND:'+c.dtend,
-    'SUMMARY:'+c.summary,
-    'LOCATION:'+c.location,
-    'DESCRIPTION:'+c.description,
+    'SUMMARY:'+esc(c.summary),
+    'LOCATION:'+esc(c.location),
+    'DESCRIPTION:'+esc(c.description),
     'END:VEVENT','END:VCALENDAR'
   ].join('\r\n');
-  var blob = new Blob([content], {type:'text/calendar;charset=utf-8'});
+
+  // Blob .ics: iOS mostra "Aggiungi al calendario", Android lo apre nell'app calendario
+  var blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'evento-ravanusella-'+id+'.ics';
+  a.href = url; a.download = (id||'evento')+'.ics';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 8000);
 }
 
 function toggleMonitoraggio(e){
   e.stopPropagation();
   var wrap = document.getElementById('nav-monitoraggio-wrap');
-  wrap.classList.toggle('open');
+  var menu = document.getElementById('nav-monitoraggio-menu');
+  var open = wrap.classList.toggle('open');
+  if(open && window.innerWidth <= 960){
+    var r = document.getElementById('nav-monitoraggio').getBoundingClientRect();
+    var left = r.left;
+    if(left + 180 > window.innerWidth) left = window.innerWidth - 180;
+    menu.style.position = 'fixed';
+    menu.style.top = (r.bottom + 4) + 'px';
+    menu.style.left = Math.max(8, left) + 'px';
+    menu.style.right = 'auto';
+  } else {
+    menu.style.position = '';
+    menu.style.top = '';
+    menu.style.left = '';
+    menu.style.right = '';
+  }
 }
 function closeMonitoraggio(){
-  document.getElementById('nav-monitoraggio-wrap').classList.remove('open');
+  var wrap = document.getElementById('nav-monitoraggio-wrap');
+  if(wrap) wrap.classList.remove('open');
+  var menu = document.getElementById('nav-monitoraggio-menu');
+  if(menu){ menu.style.position=''; menu.style.top=''; menu.style.left=''; menu.style.right=''; }
 }
-document.addEventListener('click', function(){ closeMonitoraggio(); });
+function toggleBurger(e){
+  if(e) e.stopPropagation();
+  var b = document.getElementById('nav-burger');
+  var l = document.getElementById('nav-links');
+  var open = b.classList.toggle('open');
+  if(l) l.classList.toggle('open', open);
+}
+function closeBurger(){
+  var b = document.getElementById('nav-burger'); if(b) b.classList.remove('open');
+  var l = document.getElementById('nav-links'); if(l) l.classList.remove('open');
+}
+document.addEventListener('click', function(){ closeMonitoraggio(); closeBurger(); });
 
+/* ===================== [6] AVVIO ===================== */
 renderConsiglieri();
 renderHomeNews('tutti');
 renderMediaGrid('tutti');
