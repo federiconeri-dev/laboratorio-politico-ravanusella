@@ -463,6 +463,126 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
   #page-home .home-flusso{grid-template-columns:1fr}
 }
 
+/* ===== PUPI CONSIGLIO ===== */
+#page-consiglio{padding-bottom:80px}
+#arena{max-width:1280px;margin:0 auto;padding:0}
+.arena-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));border-top:2px solid var(--black);border-left:2px solid var(--black)}
+.arena-label{grid-column:1/-1;font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-dark);padding:16px 0 12px;border-bottom:2px solid var(--black)}
+.pupo-card{position:relative;border-right:2px solid var(--black);border-bottom:2px solid var(--black);background:var(--white);transition:background .15s,opacity .3s}
+.pupo-card:hover{background:var(--gray-light)}
+.pupo-frame{position:relative;height:170px;background:var(--gray-mid);border-bottom:2px solid var(--black);overflow:visible}
+.pupo-cardinfo{padding:14px}
+.schieramento-badge{display:inline-block;font-family:var(--font-mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--black);margin-bottom:8px}
+.schieramento-badge.filo{background:var(--yellow)}
+.schieramento-badge.oppo{background:var(--black);color:var(--white)}
+.pupo-name{font-family:var(--font-display);font-size:16px;font-weight:700;line-height:1.15;margin-bottom:3px}
+.pupo-lista{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-dark);line-height:1.4}
+.pupo-voti{font-family:var(--font-mono);font-size:10px;color:var(--gray-dark);margin-top:9px;border-top:1px solid var(--gray-mid);padding-top:8px}
+.pupo{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:108px;height:158px;cursor:grab;user-select:none;touch-action:none;z-index:1;transition:filter .15s}
+.pupo:hover{filter:drop-shadow(0 5px 9px rgba(0,0,0,.22))}
+.pupo.dragging{cursor:grabbing}
+.pupo svg{width:100%;height:100%;overflow:visible;display:block}
+.pupo-head{transform-origin:50% 14%;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.pupo-body{transform-origin:50% 30%;transition:transform .15s ease}
+.pupo-arm-l{transform-origin:24% 38%;transition:transform .2s ease}
+.pupo-arm-r{transform-origin:76% 38%;transition:transform .2s ease}
+.pupo-leg-l{transform-origin:42% 80%;transition:transform .2s ease}
+.pupo-leg-r{transform-origin:58% 80%;transition:transform .2s ease}
+.pupo.grabbed .pupo-head{transform:rotate(32deg) translateY(11px)}
+.pupo.grabbed .pupo-body{transform:rotate(-4deg) translateY(8px)}
+.pupo.grabbed .pupo-arm-l{transform:rotate(62deg)}
+.pupo.grabbed .pupo-arm-r{transform:rotate(-62deg)}
+.pupo.grabbed .pupo-leg-l{transform:rotate(22deg)}
+.pupo.grabbed .pupo-leg-r{transform:rotate(-22deg)}
+.pupo.dangling .pupo-head{transform:rotate(26deg) translateY(9px);transition:transform .1s ease}
+.pupo.dangling .pupo-body{transform:rotate(var(--sway,0deg));transition:transform .12s ease}
+.pupo.dangling .pupo-arm-l{transform:rotate(58deg) translateY(5px)}
+.pupo.dangling .pupo-arm-r{transform:rotate(-58deg) translateY(5px)}
+.pupo.dangling .pupo-leg-l{transform:rotate(20deg) translateY(7px)}
+.pupo.dangling .pupo-leg-r{transform:rotate(-20deg) translateY(7px)}
+.pupo.falling .pupo-head{transform:rotate(40deg) translateY(12px)}
+.pupo.falling .pupo-arm-l{transform:rotate(80deg)}
+.pupo.falling .pupo-arm-r{transform:rotate(-80deg)}
+.pupo.falling .pupo-leg-l{transform:rotate(35deg)}
+.pupo.falling .pupo-leg-r{transform:rotate(-35deg)}
+#interrogatorio{position:fixed;bottom:0;left:0;right:0;height:72px;background:#0b0b0b;border-top:3px solid var(--yellow);z-index:800;overflow:hidden;transition:height .45s cubic-bezier(.4,0,.2,1),box-shadow .25s;display:none}
+#interrogatorio.shown{display:block}
+#interrogatorio.hot{height:200px;box-shadow:0 -6px 40px rgba(255,214,0,.35)}
+#interrogatorio.active{height:clamp(300px,46vh,420px)}
+#interrogatorio.active::after{content:'';position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse 60% 70% at 50% 86%, transparent 30%, rgba(0,0,0,.72) 100%)}
+#lamp{position:absolute;top:0;left:50%;transform-origin:50% 0;z-index:5;animation:lampSwing 4.5s ease-in-out infinite}
+@keyframes lampSwing{0%,100%{transform:translateX(-50%) rotate(-3deg)}50%{transform:translateX(-50%) rotate(3deg)}}
+#lamp svg{display:block}
+#beam{position:absolute;top:52px;left:50%;width:360px;height:320px;transform:translateX(-50%);background:linear-gradient(to bottom, rgba(255,232,120,0) 0%, rgba(255,232,120,.10) 35%, rgba(255,232,120,.32) 100%);clip-path:polygon(46% 0,54% 0,96% 100%,4% 100%);filter:blur(5px);opacity:0;z-index:2;pointer-events:none}
+#interrogatorio.lit #beam{opacity:1;animation:strike .55s steps(1,end)}
+@keyframes strike{0%{opacity:0}8%{opacity:1}16%{opacity:.15}24%{opacity:1}34%{opacity:.3}44%{opacity:1}60%{opacity:.5}70%{opacity:1}}
+#beam.buzz{animation:buzz 3.2s ease-in-out infinite}
+@keyframes buzz{0%,100%{opacity:1}47%{opacity:.95}49%{opacity:.72}51%{opacity:.96}}
+#pool{position:absolute;bottom:54px;left:50%;width:240px;height:50px;transform:translateX(-50%);background:radial-gradient(ellipse, rgba(255,236,150,.55) 0%, rgba(255,236,150,.12) 55%, transparent 72%);opacity:0;z-index:1;pointer-events:none;transition:opacity .4s .35s}
+#interrogatorio.lit #pool{opacity:1}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:8;pointer-events:none}
+#sedia{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);z-index:5;opacity:0;transition:opacity .3s}
+#sedia.visible{opacity:1}
+#sala-pupo{position:absolute;bottom:84px;left:50%;transform:translateX(-50%);width:96px;height:135px;z-index:6;opacity:0;pointer-events:none;transition:opacity .35s}
+#sala-pupo.visible{opacity:1}
+#sala-pupo svg{width:100%;height:100%;overflow:visible}
+#sala-pupo.seated .pupo-head{transform:rotate(-7deg)}
+#sala-pupo.seated .pupo-leg-l{transform:rotate(16deg)}
+#sala-pupo.seated .pupo-leg-r{transform:rotate(-16deg)}
+.sweat{position:absolute;top:26px;width:7px;height:10px;background:radial-gradient(circle at 50% 35%, #cdeafe, #5fa8d8);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:0;z-index:7}
+#sala-pupo.visible .sweat{animation:drip 1.7s ease-in infinite}
+#sala-pupo .sweat.a{left:30px}
+#sala-pupo .sweat.b{left:62px;animation-delay:.85s}
+@keyframes drip{0%{transform:translateY(0);opacity:0}18%{opacity:.95}100%{transform:translateY(30px);opacity:0}}
+#sala-scheda{position:absolute;right:5%;top:50%;transform:translateY(-50%) translateX(30px);width:260px;background:var(--white);border:3px solid var(--yellow);box-shadow:0 0 60px rgba(255,220,0,.3);padding:18px;opacity:0;z-index:9;pointer-events:none;transition:transform .45s cubic-bezier(.34,1.2,.64,1),opacity .35s ease}
+#sala-scheda.visible{opacity:1;transform:translateY(-50%) translateX(0);pointer-events:auto}
+#sala-scheda-nome{font-family:var(--font-display);font-size:18px;font-weight:900;color:var(--black);line-height:1.1;margin-bottom:4px}
+#sala-scheda-lista{font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:12px}
+#sala-scheda-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sala-stat{text-align:center;border:1px solid var(--black);padding:8px 4px}
+.sala-stat-num{font-family:var(--font-display);font-size:19px;font-weight:900;line-height:1}
+.sala-stat-label{font-family:var(--font-mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-dark);margin-top:3px}
+#sala-scheda-btn{margin-top:12px;width:100%;padding:10px;background:var(--yellow);border:2px solid var(--black);font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-weight:600}
+#interro-bar{position:absolute;bottom:0;left:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);border-top:1px solid rgba(255,255,255,.1);z-index:10}
+#interro-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,220,0,.65)}
+#interro-count{font-family:var(--font-display);font-size:26px;font-weight:900;color:var(--yellow)}
+#interro-reset{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);cursor:pointer;border:1px solid rgba(255,255,255,.25);padding:7px 14px;background:transparent;transition:border-color .2s,color .2s}
+#interro-reset:hover{border-color:var(--yellow);color:var(--yellow)}
+#drop-hint{position:absolute;top:26px;left:0;right:0;text-align:center;z-index:3;font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,220,0,.45);transition:opacity .3s}
+#interrogatorio.active #drop-hint{opacity:0}
+#scheda-modal{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);pointer-events:none;transition:background .3s;visibility:hidden}
+#scheda-modal.open{background:rgba(0,0,0,.72);pointer-events:auto;visibility:visible}
+#scheda-box{position:relative;width:min(560px,96vw);background:var(--white);border:3px solid var(--black);box-shadow:12px 12px 0 var(--yellow);padding:clamp(24px,4vw,44px);transform:translateY(40px) scale(.94);opacity:0;transition:transform .35s cubic-bezier(.34,1.2,.64,1),opacity .28s ease}
+#scheda-modal.open #scheda-box{transform:translateY(0) scale(1);opacity:1}
+.scheda-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:2px solid var(--black);background:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.scheda-close:hover{background:var(--yellow)}
+.scheda-avatar-area{display:flex;gap:clamp(16px,3vw,28px);align-items:flex-start;margin-bottom:24px}
+.scheda-pupo-big{width:96px;height:140px;flex-shrink:0;border:2px solid var(--black);background:var(--gray-mid);position:relative}
+.scheda-pupo-big svg{width:100%;height:100%;overflow:visible;position:absolute;bottom:0;left:0}
+.scheda-modal-info{flex:1}
+.scheda-modal-badge{display:inline-block;font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--black);margin-bottom:10px}
+.scheda-modal-badge.filo{background:var(--yellow)}
+.scheda-modal-badge.oppo{background:var(--black);color:var(--white)}
+.scheda-modal-nome{font-family:var(--font-display);font-size:clamp(22px,3vw,30px);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:6px}
+.scheda-modal-lista{font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);letter-spacing:.05em;margin-bottom:16px}
+.scheda-modal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:2px solid var(--black);padding-top:16px}
+.stat-box{border:2px solid var(--black);padding:12px 10px;text-align:center}
+.stat-num{font-family:var(--font-display);font-size:24px;font-weight:900;line-height:1}
+.stat-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-dark);margin-top:4px}
+.scheda-divider{height:2px;background:var(--black);margin:20px 0}
+.scheda-section-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px}
+.scheda-tag-list{display:flex;gap:6px;flex-wrap:wrap}
+.scheda-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--black);background:var(--gray-light)}
+.release-btn{margin-top:20px;width:100%;padding:14px;background:var(--black);color:var(--white);border:2px solid var(--black);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+.release-btn:hover{background:#333}
+@media(max-width:640px){
+  #interrogatorio.active{height:clamp(300px,64vh,440px)}
+  #sala-scheda{right:50%;top:auto;bottom:84px;transform:translateX(50%) translateY(20px);width:min(280px,86vw)}
+  #sala-scheda.visible{transform:translateX(50%) translateY(0)}
+  .pupo{width:88px;height:130px}
+  .pupo-frame{height:150px}
+}
+
 /* ===== HAMBURGER / MENU MOBILE ===== */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:38px;padding:0 9px;background:none;border:none;cursor:pointer}
 .nav-burger span{display:block;height:2px;width:100%;background:var(--black);transition:transform .25s,opacity .2s}
@@ -647,10 +767,10 @@ footer{background:var(--black);color:var(--white);padding:64px 60px 40px}
     </div>
   </div>
 
-  <!-- Tab: Consiglieri -->
+  <!-- Tab: Consiglieri (Pupi) -->
   <div class="tab-content active" id="tab-consiglieri" style="max-width:1280px;margin:0 auto;padding:clamp(20px,3vw,32px) clamp(20px,5vw,60px) 60px;">
-    <div id="consiglieri-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;"></div>
-    <div id="schede-container"></div>
+    <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;background:var(--yellow);border:2px solid var(--black);padding:10px 18px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;">✋ Afferra · Trascina · Interroga</div>
+    <div id="arena"></div>
   </div>
 
   <!-- Tab: Verbali -->
@@ -1220,30 +1340,30 @@ const EVENTI_PASSATI = [
 
 /* -- CONSIGLIO COMUNALE - per la foto aggiungi  foto:'assets/foto/nome.jpg' -- */
 const CONSIGLIERI = [
-  { nome:"Giampiero Carta", lista:"Partito Democratico", voti:435, schieramento:"filo-giunta" },
-  { nome:"Sandro Fanara", lista:"Partito Democratico", voti:430, schieramento:"filo-giunta" },
-  { nome:"Elvira Mangione", lista:"Controcorrente – Ismaele La Vardera", voti:489, schieramento:"filo-giunta" },
-  { nome:"Irene Fucà", lista:"Indipendente AVS", voti:436, schieramento:"filo-giunta" },
-  { nome:"Alessandro Svettini", lista:"Controcorrente – Ismaele La Vardera", voti:377, schieramento:"filo-giunta" },
-  { nome:"Geraldo Alongi", lista:"Forza Italia", voti:451, schieramento:"opposizione" },
-  { nome:"Davide Cacciatore", lista:"Forza Italia", voti:626, schieramento:"opposizione" },
-  { nome:"Alessia Cantone", lista:"Lega", voti:478, schieramento:"opposizione" },
-  { nome:"Fabio Catania", lista:"Democrazia Cristiana", voti:332, schieramento:"opposizione" },
-  { nome:"Valentina Cirino", lista:"Lega", voti:327, schieramento:"opposizione" },
-  { nome:"Costantino Ciulla", lista:"Fratelli d'Italia", voti:785, schieramento:"opposizione" },
-  { nome:"Giovanni Civiltà", lista:"Forza Italia", voti:844, schieramento:"opposizione" },
-  { nome:"Marcello Fattori", lista:"Forza Azzurri", voti:655, schieramento:"opposizione" },
-  { nome:"William Giacalone", lista:"Forza Azzurri", voti:280, schieramento:"opposizione" },
-  { nome:"Simone Gramaglia", lista:"Fratelli d'Italia", voti:767, schieramento:"opposizione" },
-  { nome:"Cristian Licata", lista:"Forza Italia", voti:580, schieramento:"opposizione" },
-  { nome:"Giuseppe Salvatore Nocera", lista:"Democrazia Cristiana", voti:526, schieramento:"opposizione" },
-  { nome:"Gerlando Piparo", lista:"Fratelli d'Italia", voti:885, schieramento:"opposizione" },
-  { nome:"Ilaria Maria Settembrino", lista:"Popolari e Autonomisti – Grande Sicilia", voti:617, schieramento:"opposizione" },
-  { nome:"Pasquale Spataro", lista:"Fratelli d'Italia", voti:805, schieramento:"opposizione" },
-  { nome:"Angelo Vaccarello", lista:"Popolari e Autonomisti – Grande Sicilia", voti:652, schieramento:"opposizione" },
-  { nome:"Laura Vento", lista:"Fratelli d'Italia", voti:482, schieramento:"opposizione" },
-  { nome:"Marco Vullo", lista:"Popolari e Autonomisti – Grande Sicilia", voti:823, schieramento:"opposizione" },
-  { nome:"Dino Alonge", lista:"Centro-destra (lista da confermare)", voti:null, schieramento:"opposizione", nota:"Candidato sindaco del centro-destra, sconfitto al ballottaggio" },
+  { nome:"Giampiero Carta", lista:"Partito Democratico", voti:435, schieramento:"filo-giunta", sesso:"M" },
+  { nome:"Sandro Fanara", lista:"Partito Democratico", voti:430, schieramento:"filo-giunta", sesso:"M" },
+  { nome:"Elvira Mangione", lista:"Controcorrente – Ismaele La Vardera", voti:489, schieramento:"filo-giunta", sesso:"F" },
+  { nome:"Irene Fucà", lista:"Indipendente AVS", voti:436, schieramento:"filo-giunta", sesso:"F" },
+  { nome:"Alessandro Svettini", lista:"Controcorrente – Ismaele La Vardera", voti:377, schieramento:"filo-giunta", sesso:"M" },
+  { nome:"Geraldo Alongi", lista:"Forza Italia", voti:451, schieramento:"opposizione", sesso:"M" },
+  { nome:"Davide Cacciatore", lista:"Forza Italia", voti:626, schieramento:"opposizione", sesso:"M" },
+  { nome:"Alessia Cantone", lista:"Lega", voti:478, schieramento:"opposizione", sesso:"F" },
+  { nome:"Fabio Catania", lista:"Democrazia Cristiana", voti:332, schieramento:"opposizione", sesso:"M" },
+  { nome:"Valentina Cirino", lista:"Lega", voti:327, schieramento:"opposizione", sesso:"F" },
+  { nome:"Costantino Ciulla", lista:"Fratelli d'Italia", voti:785, schieramento:"opposizione", sesso:"M" },
+  { nome:"Giovanni Civiltà", lista:"Forza Italia", voti:844, schieramento:"opposizione", sesso:"M" },
+  { nome:"Marcello Fattori", lista:"Forza Azzurri", voti:655, schieramento:"opposizione", sesso:"M" },
+  { nome:"William Giacalone", lista:"Forza Azzurri", voti:280, schieramento:"opposizione", sesso:"M" },
+  { nome:"Simone Gramaglia", lista:"Fratelli d'Italia", voti:767, schieramento:"opposizione", sesso:"M" },
+  { nome:"Cristian Licata", lista:"Forza Italia", voti:580, schieramento:"opposizione", sesso:"M" },
+  { nome:"Giuseppe Salvatore Nocera", lista:"Democrazia Cristiana", voti:526, schieramento:"opposizione", sesso:"M" },
+  { nome:"Gerlando Piparo", lista:"Fratelli d'Italia", voti:885, schieramento:"opposizione", sesso:"M" },
+  { nome:"Ilaria Maria Settembrino", lista:"Popolari e Autonomisti – Grande Sicilia", voti:617, schieramento:"opposizione", sesso:"F" },
+  { nome:"Pasquale Spataro", lista:"Fratelli d'Italia", voti:805, schieramento:"opposizione", sesso:"M" },
+  { nome:"Angelo Vaccarello", lista:"Popolari e Autonomisti – Grande Sicilia", voti:652, schieramento:"opposizione", sesso:"M" },
+  { nome:"Laura Vento", lista:"Fratelli d'Italia", voti:482, schieramento:"opposizione", sesso:"F" },
+  { nome:"Marco Vullo", lista:"Popolari e Autonomisti – Grande Sicilia", voti:823, schieramento:"opposizione", sesso:"M" },
+  { nome:"Dino Alonge", lista:"Centro-destra (lista da confermare)", voti:null, schieramento:"opposizione", sesso:"M", nota:"Candidato sindaco del centro-destra, sconfitto al ballottaggio" },
 ];
 
 /* ===================== [2] IMPOSTAZIONI ===================== */
@@ -1257,90 +1377,283 @@ function tbadge(m){ return '<span class="tcat '+(m.mcat||'')+'">'+(m.tipo||'').t
 function initials(nome){ var p=(nome||'').trim().split(/\s+/); return ((p[0]?p[0][0]:'')+(p.length>1?p[p.length-1][0]:'')).toUpperCase(); }
 function avatar(c){ var nome=c?(c.nome||''):''; var mono='<span class="av-mono">'+initials(nome)+'</span>'; if(c&&c.foto){ return mono+'<img src="'+c.foto+'" alt="'+nome+'" class="av-img" loading="lazy" onerror="this.remove()">'; } return mono; }
 
-/* ===================== [3] RENDERING ===================== */
-function renderConsiglieri() {
-  const grid = document.getElementById("consiglieri-grid");
-  const schede = document.getElementById("schede-container");
-  const magg = CONSIGLIERI.filter(c => c.schieramento === "filo-giunta");
-  const oppo = CONSIGLIERI.filter(c => c.schieramento === "opposizione");
-
-  function card(c, i) {
-    return `<div onclick="showScheda(${i})" style="border:2px solid var(--black);cursor:pointer;transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='var(--black)';this.style.color='var(--white)';this.querySelector('.card-party').style.color='rgba(255,255,255,0.6)'" onmouseout="this.style.background='';this.style.color='';this.querySelector('.card-party').style.color=''">
-      <div style="position:relative;aspect-ratio:3/4;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-        ${avatar(c)}
-      </div>
-      <div style="padding:16px;border-top:2px solid var(--black);">
-        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;border:1px solid currentColor;padding:2px 6px;display:inline-block;margin-bottom:8px;">${c.schieramento === 'filo-giunta' ? 'Filo-giunta' : 'Opposizione'}</span>
-        <h3 style="font-family:var(--font-display);font-size:17px;font-weight:600;line-height:1.2;margin-bottom:4px;">${c.nome}</h3>
-        <p class="card-party" style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);margin-bottom:12px;transition:color 0.15s;">${c.lista}</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:10px;border-top:1px solid currentColor;opacity:0.6;">
-          <div style="display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg> —
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> —
-          </div>
-        </div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--gray-dark);margin-top:8px;transition:color 0.15s;">
-          🗳 ${c.voti ? c.voti + ' pref.' : '—'}
-        </div>
-      </div>
-    </div>`;
-  }
-
-  function label(txt) {
-    return `<div style="grid-column:1/-1;padding:16px 0 12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-dark);border-bottom:var(--border);margin-bottom:4px;">${txt}</div>`;
-  }
-
-  grid.innerHTML =
-    `<div style="display:contents;">` +
-    label("Filo-giunta") + magg.map((c,i) => card(c,i)).join("") +
-    label("Opposizione") + oppo.map((c,i) => card(c, magg.length+i)).join("") +
-    `</div>`;
-
-  schede.innerHTML = CONSIGLIERI.map((c,i) => `
-    <div class="scheda-wrap" id="scheda-${i}">
-      <button class="scheda-back" onclick="closeScheda(${i})">← Consiglio Comunale</button>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,48px);margin-bottom:64px;">
-        <div style="position:relative;border:2px solid var(--black);aspect-ratio:3/4;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          ${avatar(c)}
-        </div>
-        <div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-            <span class="badge">${c.lista}</span>
-            <span class="badge" style="${c.schieramento==='filo-giunta'?'background:var(--yellow);':''}">
-              ${c.schieramento === 'filo-giunta' ? 'Filo-giunta' : 'Opposizione'}
-            </span>
-          </div>
-          <h1 style="font-family:var(--font-display);font-size:clamp(36px,4vw,52px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin-bottom:16px;">${c.nome}</h1>
-          <p style="font-family:var(--font-body);font-size:15px;color:#777;line-height:1.65;margin-bottom:32px;">Consigliere comunale — Elezioni comunali 2026${c.voti ? ' · 🗳 ' + c.voti + ' preferenze' : ''}</p>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">
-            <div style="border:2px solid var(--black);padding:16px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.4;margin-bottom:10px;display:block;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-              <div style="font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1;">—</div>
-              <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-dark);margin-top:6px;">Presenze</div>
-            </div>
-            <div style="border:2px solid var(--black);padding:16px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.4;margin-bottom:10px;display:block;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <div style="font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1;">—</div>
-              <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-dark);margin-top:6px;">Interventi</div>
-            </div>
-            <div style="border:2px solid var(--black);padding:16px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.4;margin-bottom:10px;display:block;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <div style="font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1;">0</div>
-              <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-dark);margin-top:6px;">Attività</div>
-            </div>
-          </div>
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-dark);margin-bottom:10px;">Aree di interesse</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <span style="background:var(--gray-light);border:var(--border);font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;color:var(--gray-dark);">Non ancora disponibili</span>
-          </div>
-        </div>
-      </div>
-      <section>
-      </section>
-    </div>`).join("");
+/* ===================== [3] RENDERING — PUPI CONSIGLIO ===================== */
+function getColorPupo(l){
+  var COL = {
+    "Partito Democratico":{body:"#D63031",shirt:"#c0392b",tie:"#2d3436"},
+    "Fratelli d'Italia":{body:"#2d3436",shirt:"#3d5a80",tie:"#e17055"},
+    "Forza Italia":{body:"#0984e3",shirt:"#74b9ff",tie:"#2d3436"},
+    "Lega":{body:"#27ae60",shirt:"#2ecc71",tie:"#2d3436"},
+    "Democrazia Cristiana":{body:"#8e44ad",shirt:"#9b59b6",tie:"#f1c40f"},
+    "Forza Azzurri":{body:"#2980b9",shirt:"#3498db",tie:"#e74c3c"},
+    "Popolari e Autonomisti – Grande Sicilia":{body:"#e67e22",shirt:"#f39c12",tie:"#2d3436"},
+    "Indipendente AVS":{body:"#1abc9c",shirt:"#16a085",tie:"#2d3436"},
+    "Controcorrente – Ismaele La Vardera":{body:"#fd79a8",shirt:"#e84393",tie:"#2d3436"},
+    "Centro-destra (lista da confermare)":{body:"#636e72",shirt:"#b2bec3",tie:"#2d3436"}
+  };
+  return COL[l] || {body:"#555",shirt:"#888",tie:"#333"};
 }
+function lastNamePupo(n){ var p=n.trim().split(/\s+/); return p[p.length-1]; }
+
+function pupoBuildM(c, W, H){
+  W=W||100; H=H||145;
+  var cl=getColorPupo(c.lista);
+  return '<svg viewBox="0 0 '+W+' '+H+'" fill="none" xmlns="http://www.w3.org/2000/svg">'
+  +'<g class="pupo-head">'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.28)+'" rx="'+(W*.19)+'" ry="'+(H*.055)+'" fill="#111"/>'
+  +'<rect x="'+(W*.32)+'" y="'+(H*.16)+'" width="'+(W*.36)+'" height="'+(H*.12)+'" rx="4" fill="#1a1a1a"/>'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.32)+'" rx="'+(W*.175)+'" ry="'+(W*.19)+'" fill="#f5c99a"/>'
+  +'<ellipse cx="'+(W*.42)+'" cy="'+(H*.305)+'" rx="3" ry="3.5" fill="#2d3436"/>'
+  +'<ellipse cx="'+(W*.58)+'" cy="'+(H*.305)+'" rx="3" ry="3.5" fill="#2d3436"/>'
+  +'<ellipse cx="'+(W*.425)+'" cy="'+(H*.303)+'" rx="1" ry="1" fill="#fff" opacity=".7"/>'
+  +'<ellipse cx="'+(W*.585)+'" cy="'+(H*.303)+'" rx="1" ry="1" fill="#fff" opacity=".7"/>'
+  +'<path d="M '+(W*.38)+' '+(H*.285)+' Q '+(W*.41)+' '+(H*.275)+' '+(W*.44)+' '+(H*.282)+'" stroke="#6d4c41" stroke-width="1.5" stroke-linecap="round"/>'
+  +'<path d="M '+(W*.56)+' '+(H*.282)+' Q '+(W*.59)+' '+(H*.275)+' '+(W*.62)+' '+(H*.285)+'" stroke="#6d4c41" stroke-width="1.5" stroke-linecap="round"/>'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.33)+'" rx="3.5" ry="3" fill="#e8a87c"/>'
+  +'<path d="M '+(W*.43)+' '+(H*.355)+' Q '+(W*.5)+' '+(H*.375)+' '+(W*.57)+' '+(H*.355)+'" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round" fill="none"/>'
+  +'<path d="M '+(W*.41)+' '+(H*.35)+' Q '+(W*.44)+' '+(H*.36)+' '+(W*.5)+' '+(H*.355)+'" stroke="#5d4037" stroke-width="1.5" stroke-linecap="round" fill="none"/>'
+  +'<path d="M '+(W*.5)+' '+(H*.355)+' Q '+(W*.56)+' '+(H*.36)+' '+(W*.59)+' '+(H*.35)+'" stroke="#5d4037" stroke-width="1.5" stroke-linecap="round" fill="none"/>'
+  +'</g>'
+  +'<rect x="'+(W*.44)+'" y="'+(H*.47)+'" width="'+(W*.12)+'" height="'+(H*.06)+'" rx="2" fill="#f5c99a" class="pupo-body"/>'
+  +'<g class="pupo-body">'
+  +'<rect x="'+(W*.28)+'" y="'+(H*.52)+'" width="'+(W*.44)+'" height="'+(H*.28)+'" rx="5" fill="'+cl.body+'"/>'
+  +'<rect x="'+(W*.4)+'" y="'+(H*.52)+'" width="'+(W*.2)+'" height="'+(H*.28)+'" rx="3" fill="'+cl.shirt+'" opacity=".7"/>'
+  +'<path d="M '+(W*.47)+' '+(H*.55)+' L '+(W*.5)+' '+(H*.72)+' L '+(W*.53)+' '+(H*.55)+' Z" fill="'+cl.tie+'" opacity=".9"/>'
+  +'<circle cx="'+(W/2)+'" cy="'+(H*.62)+'" r="2" fill="'+cl.tie+'" opacity=".5"/>'
+  +'<circle cx="'+(W/2)+'" cy="'+(H*.68)+'" r="2" fill="'+cl.tie+'" opacity=".5"/>'
+  +'<rect x="'+(W*.28)+'" y="'+(H*.775)+'" width="'+(W*.44)+'" height="'+(H*.028)+'" rx="2" fill="#1a1a1a"/>'
+  +'<rect x="'+(W*.44)+'" y="'+(H*.775)+'" width="'+(W*.12)+'" height="'+(H*.028)+'" rx="1" fill="#f5c99a" stroke="#1a1a1a" stroke-width="1"/>'
+  +'</g>'
+  +'<g class="pupo-leg-l">'
+  +'<rect x="'+(W*.3)+'" y="'+(H*.79)+'" width="'+(W*.18)+'" height="'+(H*.17)+'" rx="4" fill="'+cl.body+'"/>'
+  +'<rect x="'+(W*.28)+'" y="'+(H*.935)+'" width="'+(W*.21)+'" height="'+(H*.065)+'" rx="4" fill="#1a1a1a"/>'
+  +'</g>'
+  +'<g class="pupo-leg-r">'
+  +'<rect x="'+(W*.52)+'" y="'+(H*.79)+'" width="'+(W*.18)+'" height="'+(H*.17)+'" rx="4" fill="'+cl.body+'"/>'
+  +'<rect x="'+(W*.51)+'" y="'+(H*.935)+'" width="'+(W*.21)+'" height="'+(H*.065)+'" rx="4" fill="#1a1a1a"/>'
+  +'</g>'
+  +'<g class="pupo-arm-l">'
+  +'<rect x="'+(W*.14)+'" y="'+(H*.52)+'" width="'+(W*.155)+'" height="'+(H*.1)+'" rx="5" fill="'+cl.body+'" transform="rotate(15,'+(W*.22)+','+(H*.52)+')"/>'
+  +'<ellipse cx="'+(W*.17)+'" cy="'+(H*.63)+'" rx="'+(W*.065)+'" ry="'+(W*.058)+'" fill="#f5c99a"/>'
+  +'</g>'
+  +'<g class="pupo-arm-r">'
+  +'<rect x="'+(W*.695)+'" y="'+(H*.52)+'" width="'+(W*.155)+'" height="'+(H*.1)+'" rx="5" fill="'+cl.body+'" transform="rotate(-15,'+(W*.775)+','+(H*.52)+')"/>'
+  +'<ellipse cx="'+(W*.83)+'" cy="'+(H*.63)+'" rx="'+(W*.065)+'" ry="'+(W*.058)+'" fill="#f5c99a"/>'
+  +'</g>'
+  +'<line x1="'+(W*.5)+'" y1="0" x2="'+(W*.5)+'" y2="'+(H*.12)+'" stroke="#888" stroke-width="1.5" stroke-dasharray="3,2" opacity=".55"/>'
+  +'</svg>';
+}
+
+function pupoBuildF(c, W, H){
+  W=W||100; H=H||145;
+  var cl=getColorPupo(c.lista);
+  return '<svg viewBox="0 0 '+W+' '+H+'" fill="none" xmlns="http://www.w3.org/2000/svg">'
+  +'<g class="pupo-head">'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.285)+'" rx="'+(W*.205)+'" ry="'+(H*.22)+'" fill="#4a2c0a"/>'
+  +'<ellipse cx="'+(W*.35)+'" cy="'+(H*.38)+'" rx="'+(W*.07)+'" ry="'+(H*.1)+'" fill="#4a2c0a"/>'
+  +'<ellipse cx="'+(W*.65)+'" cy="'+(H*.38)+'" rx="'+(W*.07)+'" ry="'+(H*.1)+'" fill="#4a2c0a"/>'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.305)+'" rx="'+(W*.165)+'" ry="'+(W*.185)+'" fill="#f5c99a"/>'
+  +'<ellipse cx="'+(W*.42)+'" cy="'+(H*.295)+'" rx="3" ry="3.5" fill="#2d3436"/>'
+  +'<ellipse cx="'+(W*.58)+'" cy="'+(H*.295)+'" rx="3" ry="3.5" fill="#2d3436"/>'
+  +'<ellipse cx="'+(W*.425)+'" cy="'+(H*.293)+'" rx="1" ry="1" fill="#fff" opacity=".7"/>'
+  +'<ellipse cx="'+(W*.585)+'" cy="'+(H*.293)+'" rx="1" ry="1" fill="#fff" opacity=".7"/>'
+  +'<path d="M '+(W*.38)+' '+(H*.278)+' L '+(W*.385)+' '+(H*.272)+'" stroke="#2d3436" stroke-width="1.2" stroke-linecap="round"/>'
+  +'<path d="M '+(W*.41)+' '+(H*.273)+' L '+(W*.41)+' '+(H*.266)+'" stroke="#2d3436" stroke-width="1.2" stroke-linecap="round"/>'
+  +'<path d="M '+(W*.44)+' '+(H*.272)+' L '+(W*.447)+' '+(H*.266)+'" stroke="#2d3436" stroke-width="1.2" stroke-linecap="round"/>'
+  +'<path d="M '+(W*.56)+' '+(H*.272)+' L '+(W*.553)+' '+(H*.266)+'" stroke="#2d3436" stroke-width="1.2" stroke-linecap="round"/>'
+  +'<path d="M '+(W*.59)+' '+(H*.273)+' L '+(W*.59)+' '+(H*.266)+'" stroke="#2d3436" stroke-width="1.2" stroke-linecap="round"/>'
+  +'<path d="M '+(W*.615)+' '+(H*.278)+' L '+(W*.62)+' '+(H*.272)+'" stroke="#2d3436" stroke-width="1.2" stroke-linecap="round"/>'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.32)+'" rx="3" ry="2.5" fill="#e8a87c"/>'
+  +'<path d="M '+(W*.43)+' '+(H*.345)+' Q '+(W*.5)+' '+(H*.365)+' '+(W*.57)+' '+(H*.345)+'" fill="#e74c3c" stroke="#c0392b" stroke-width="1" stroke-linecap="round"/>'
+  +'<ellipse cx="'+(W*.38)+'" cy="'+(H*.335)+'" rx="'+(W*.04)+'" ry="'+(H*.02)+'" fill="#f06292" opacity=".35"/>'
+  +'<ellipse cx="'+(W*.62)+'" cy="'+(H*.335)+'" rx="'+(W*.04)+'" ry="'+(H*.02)+'" fill="#f06292" opacity=".35"/>'
+  +'</g>'
+  +'<rect x="'+(W*.44)+'" y="'+(H*.46)+'" width="'+(W*.12)+'" height="'+(H*.065)+'" rx="2" fill="#f5c99a" class="pupo-body"/>'
+  +'<g class="pupo-body">'
+  +'<path d="M '+(W*.25)+' '+(H*.52)+' Q '+(W*.2)+' '+(H*.78)+' '+(W*.24)+' '+(H*.88)+' L '+(W*.76)+' '+(H*.88)+' Q '+(W*.8)+' '+(H*.78)+' '+(W*.75)+' '+(H*.52)+' Z" fill="'+cl.body+'"/>'
+  +'<rect x="'+(W*.32)+'" y="'+(H*.52)+'" width="'+(W*.36)+'" height="'+(H*.2)+'" rx="5" fill="'+cl.shirt+'"/>'
+  +'<path d="M '+(W*.47)+' '+(H*.54)+' L '+(W*.5)+' '+(H*.64)+' L '+(W*.53)+' '+(H*.54)+' Z" fill="'+cl.tie+'" opacity=".8"/>'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.715)+'" rx="'+(W*.18)+'" ry="'+(H*.022)+'" fill="#fff" opacity=".35"/>'
+  +'<ellipse cx="'+(W/2)+'" cy="'+(H*.875)+'" rx="'+(W*.27)+'" ry="'+(H*.015)+'" fill="'+cl.body+'" stroke="#fff" stroke-width="1" opacity=".6"/>'
+  +'</g>'
+  +'<g class="pupo-leg-l">'
+  +'<rect x="'+(W*.41)+'" y="'+(H*.86)+'" width="'+(W*.06)+'" height="'+(H*.1)+'" rx="3" fill="#f0bd8a"/>'
+  +'<ellipse cx="'+(W*.44)+'" cy="'+(H*.965)+'" rx="'+(W*.062)+'" ry="'+(H*.025)+'" fill="#1a1a1a"/>'
+  +'</g>'
+  +'<g class="pupo-leg-r">'
+  +'<rect x="'+(W*.53)+'" y="'+(H*.86)+'" width="'+(W*.06)+'" height="'+(H*.1)+'" rx="3" fill="#f0bd8a"/>'
+  +'<ellipse cx="'+(W*.56)+'" cy="'+(H*.965)+'" rx="'+(W*.062)+'" ry="'+(H*.025)+'" fill="#1a1a1a"/>'
+  +'</g>'
+  +'<g class="pupo-arm-l">'
+  +'<rect x="'+(W*.13)+'" y="'+(H*.52)+'" width="'+(W*.14)+'" height="'+(H*.1)+'" rx="5" fill="'+cl.shirt+'" transform="rotate(12,'+(W*.2)+','+(H*.52)+')"/>'
+  +'<ellipse cx="'+(W*.165)+'" cy="'+(H*.635)+'" rx="'+(W*.06)+'" ry="'+(W*.05)+'" fill="#f5c99a"/>'
+  +'</g>'
+  +'<g class="pupo-arm-r">'
+  +'<rect x="'+(W*.73)+'" y="'+(H*.52)+'" width="'+(W*.14)+'" height="'+(H*.1)+'" rx="5" fill="'+cl.shirt+'" transform="rotate(-12,'+(W*.8)+','+(H*.52)+')"/>'
+  +'<ellipse cx="'+(W*.835)+'" cy="'+(H*.635)+'" rx="'+(W*.06)+'" ry="'+(W*.05)+'" fill="#f5c99a"/>'
+  +'</g>'
+  +'<line x1="'+(W*.5)+'" y1="0" x2="'+(W*.5)+'" y2="'+(H*.1)+'" stroke="#888" stroke-width="1.5" stroke-dasharray="3,2" opacity=".55"/>'
+  +'</svg>';
+}
+function pupoBuild(c,W,H){ return c.sesso==='F' ? pupoBuildF(c,W,H) : pupoBuildM(c,W,H); }
+
+function renderConsiglieri(){
+  var arena=document.getElementById('arena');
+  if(!arena) return;
+  var filo=[], oppo=[];
+  CONSIGLIERI.forEach(function(c,i){ (c.schieramento==='filo-giunta'?filo:oppo).push(i); });
+  function card(i){
+    var c=CONSIGLIERI[i];
+    var isFilo=c.schieramento==='filo-giunta';
+    return '<div class="pupo-card" id="card-'+i+'">'
+      +'<div class="pupo-frame">'
+      +'<div class="pupo" id="pupo-'+i+'" data-idx="'+i+'" onmousedown="startDrag(event,'+i+')" ontouchstart="startDragTouch(event,'+i+')">'+pupoBuild(c,108,158)+'</div>'
+      +'</div>'
+      +'<div class="pupo-cardinfo">'
+      +'<span class="schieramento-badge '+(isFilo?'filo':'oppo')+'">'+(isFilo?'Filo-giunta':'Opposizione')+'</span>'
+      +'<div class="pupo-name">'+c.nome+'</div>'
+      +'<div class="pupo-lista">'+(c.lista.length>26?c.lista.slice(0,24)+'…':c.lista)+'</div>'
+      +(c.voti?'<div class="pupo-voti">🗳 '+c.voti+' pref.</div>':'')
+      +'</div>'
+      +'</div>';
+  }
+  arena.innerHTML =
+    '<div class="arena-grid">'
+    + '<div class="arena-label">◆ Filo-giunta</div>'
+    + filo.map(card).join('')
+    + '<div class="arena-label">◆ Opposizione</div>'
+    + oppo.map(card).join('')
+    + '</div>';
+}
+
+/* ===== DRAG PUPI ===== */
+var drag=null, currentConsigliere=null, currentIdx=null;
+function startDrag(e,idx){ if(e.button!==0) return; e.preventDefault(); beginDrag(idx,e.clientX,e.clientY); window.addEventListener('mousemove',onMove); window.addEventListener('mouseup',onUp); }
+function startDragTouch(e,idx){ var t=e.touches[0]; beginDrag(idx,t.clientX,t.clientY); window.addEventListener('touchmove',onTouchMove,{passive:false}); window.addEventListener('touchend',onUp); }
+function onTouchMove(e){ e.preventDefault(); var t=e.touches[0]; onMove({clientX:t.clientX,clientY:t.clientY}); }
+function beginDrag(idx,cx,cy){
+  var el=document.getElementById('pupo-'+idx);
+  if(!el || el.dataset.away==='1') return;
+  var card=document.getElementById('card-'+idx);
+  if(card && card.dataset.busy==='1') return;
+  var r=el.getBoundingClientRect();
+  drag={ idx:idx, el:el, parent:el.parentNode, next:el.nextSibling, offX:cx-r.left, offY:cy-r.top, lastX:cx, vx:0, w:r.width, h:r.height };
+  el.dataset.away='1';
+  el.style.position='fixed'; el.style.margin='0'; el.style.left=r.left+'px'; el.style.top=r.top+'px';
+  el.style.width=r.width+'px'; el.style.height=r.height+'px'; el.style.bottom='auto'; el.style.transform='none'; el.style.zIndex='10000';
+  el.classList.add('dragging','grabbed');
+  document.body.appendChild(el);
+  setTimeout(function(){ if(drag&&drag.el===el){ el.classList.remove('grabbed'); el.classList.add('dangling'); } },240);
+  document.body.style.cursor='grabbing';
+}
+function onMove(e){
+  if(!drag) return;
+  drag.vx=e.clientX-drag.lastX; drag.lastX=e.clientX;
+  drag.el.style.left=(e.clientX-drag.offX)+'px';
+  drag.el.style.top=(e.clientY-drag.offY)+'px';
+  var sway=Math.max(-16,Math.min(16,drag.vx*0.9));
+  drag.el.style.setProperty('--sway',sway+'deg');
+  var z=document.getElementById('interrogatorio');
+  var zr=z.getBoundingClientRect();
+  z.classList.toggle('hot', e.clientY>zr.top && !z.classList.contains('active'));
+}
+function onUp(e){
+  window.removeEventListener('mousemove',onMove);
+  window.removeEventListener('mouseup',onUp);
+  window.removeEventListener('touchmove',onTouchMove);
+  window.removeEventListener('touchend',onUp);
+  document.body.style.cursor='';
+  if(!drag) return;
+  var cx=e.clientX!=null?e.clientX:(e.changedTouches&&e.changedTouches[0].clientX)||0;
+  var cy=e.clientY!=null?e.clientY:(e.changedTouches&&e.changedTouches[0].clientY)||0;
+  var z=document.getElementById('interrogatorio');
+  var zr=z.getBoundingClientRect();
+  z.classList.remove('hot');
+  var d=drag; drag=null;
+  if(cy > zr.top - 16 && !z.classList.contains('active')){ enterInterrogation(d); }
+  else { dropFall(d); }
+}
+function dropFall(d){
+  var el=d.el;
+  el.classList.remove('grabbed','dangling');
+  el.classList.add('falling');
+  var startTop=parseFloat(el.style.top)||0;
+  var dx=(Math.random()*70-35);
+  var dy=window.innerHeight + 220 - startTop;
+  var rot=(Math.random()*100-50);
+  var anim=el.animate([ {transform:'translate(0,0) rotate(0deg)'}, {transform:'translate('+dx+'px, '+dy+'px) rotate('+rot+'deg)'} ], {duration:680, easing:'cubic-bezier(.45,0,.75,1)', fill:'forwards'});
+  anim.onfinish=function(){ restoreHome(d); };
+  setTimeout(function(){ restoreHome(d); },760);
+}
+function restoreHome(d){
+  var el=d.el;
+  if(!el || el.dataset.away!=='1') return;
+  el.getAnimations().forEach(function(a){ a.cancel(); });
+  el.classList.remove('grabbed','dangling','falling','dragging');
+  el.style.position=''; el.style.left=''; el.style.top=''; el.style.width=''; el.style.height=''; el.style.zIndex='';
+  el.style.margin=''; el.style.bottom=''; el.style.transform=''; el.style.removeProperty('--sway');
+  if(d.next && d.next.parentNode===d.parent) d.parent.insertBefore(el,d.next);
+  else d.parent.appendChild(el);
+  el.dataset.away='0';
+  el.animate([{transform:'translateX(-50%) translateY(-16px)',opacity:0},{transform:'translateX(-50%) translateY(0)',opacity:1}],{duration:320,easing:'cubic-bezier(.34,1.5,.6,1)'});
+}
+function enterInterrogation(d){
+  var idx=d.idx, c=CONSIGLIERI[idx];
+  restoreHome(d);
+  var card=document.getElementById('card-'+idx);
+  if(card){ card.style.opacity='.3'; card.style.pointerEvents='none'; card.dataset.busy='1'; }
+  currentConsigliere=c; currentIdx=idx;
+  var z=document.getElementById('interrogatorio');
+  z.classList.remove('empty','hot'); z.classList.add('active');
+  var sp=document.getElementById('sala-pupo');
+  sp.innerHTML = pupoBuild(c,96,135) + '<div class="sweat a"></div><div class="sweat b"></div>';
+  sp.classList.remove('visible','seated');
+  setTimeout(function(){ document.getElementById('sedia').classList.add('visible'); sp.classList.add('visible','seated'); },300);
+  lightsOn();
+  document.getElementById('sala-scheda-nome').textContent=c.nome;
+  document.getElementById('sala-scheda-lista').textContent=c.lista;
+  document.getElementById('ss-voti').textContent=c.voti||'—';
+  setTimeout(function(){ document.getElementById('sala-scheda').classList.add('visible'); },720);
+  document.getElementById('interro-count').textContent=lastNamePupo(c.nome).toUpperCase();
+}
+function lightsOn(){
+  var z=document.getElementById('interrogatorio');
+  var f=document.getElementById('flash');
+  setTimeout(function(){
+    z.classList.add('lit');
+    f.animate([{opacity:.85},{opacity:0}],{duration:430,easing:'ease-out'});
+    setTimeout(function(){ document.getElementById('beam').classList.add('buzz'); },560);
+  },200);
+}
+function rilascia(){
+  if(currentIdx!=null){
+    var card=document.getElementById('card-'+currentIdx);
+    if(card){ card.style.opacity=''; card.style.pointerEvents=''; card.removeAttribute('data-busy'); }
+  }
+  var z=document.getElementById('interrogatorio');
+  z.classList.remove('active','lit'); z.classList.add('empty');
+  document.getElementById('beam').classList.remove('buzz');
+  document.getElementById('sedia').classList.remove('visible');
+  var sp=document.getElementById('sala-pupo'); sp.classList.remove('visible','seated');
+  document.getElementById('sala-scheda').classList.remove('visible');
+  document.getElementById('interro-count').textContent='—';
+  setTimeout(function(){ sp.innerHTML=''; },420);
+  currentConsigliere=null; currentIdx=null;
+}
+function openSchedaModal(){
+  if(!currentConsigliere) return;
+  var c=currentConsigliere;
+  document.getElementById('scheda-pupo-big').innerHTML=pupoBuild(c,96,140);
+  var badge=document.getElementById('scheda-modal-badge');
+  badge.textContent=c.schieramento==='filo-giunta'?'Filo-giunta':'Opposizione';
+  badge.className='scheda-modal-badge '+(c.schieramento==='filo-giunta'?'filo':'oppo');
+  document.getElementById('scheda-modal-nome').textContent=c.nome;
+  document.getElementById('scheda-modal-lista').textContent=c.lista;
+  document.getElementById('scheda-modal-voti-detail').textContent=c.voti?('🗳 '+c.voti+' preferenze'):'—';
+  document.getElementById('scheda-modal-stat-voti').textContent=c.voti||'—';
+  document.getElementById('scheda-modal').classList.add('open');
+}
+function closeSchedaModal(){ document.getElementById('scheda-modal').classList.remove('open'); }
 
 async function fetchAtti() {
   try {
@@ -1448,9 +1761,13 @@ function showPage(name) {
     var _nv=document.getElementById("nav-"+name); if(_nv) _nv.classList.add("active");
   }
   window.scrollTo(0,0);
-  if (name === "consiglio") {
-    document.querySelectorAll(".scheda-wrap").forEach(s => s.classList.remove("open"));
-    document.getElementById("consiglieri-grid").style.display = "grid";
+  // Stanza interrogatorio pupi: visibile solo su Consiglio (tab Consiglieri attivo)
+  var interro = document.getElementById('interrogatorio');
+  if(interro){
+    var tabC = document.getElementById('tab-consiglieri');
+    var consiglieriAttiva = tabC && tabC.classList.contains('active');
+    if(name === 'consiglio' && consiglieriAttiva){ interro.classList.add('shown'); }
+    else { interro.classList.remove('shown'); if(typeof rilascia==='function') rilascia(); }
   }
 }
 
@@ -1465,18 +1782,20 @@ function switchTab(tab, btn) {
     if (t === tab) { b.style.background = "var(--black)"; b.style.color = "var(--white)"; }
     else { b.style.background = "transparent"; b.style.color = "var(--black)"; }
   });
+  // mostra la stanza interrogatorio solo nella tab Consiglieri
+  var interro = document.getElementById('interrogatorio');
+  if(interro){
+    if(tab === 'consiglieri'){ interro.classList.add('shown'); }
+    else { interro.classList.remove('shown'); if(typeof rilascia==='function') rilascia(); }
+  }
 }
 
 function showScheda(i) {
-  document.getElementById("consiglieri-grid").style.display = "none";
-  document.querySelectorAll(".scheda-wrap").forEach(s => s.classList.remove("open"));
-  document.getElementById("scheda-"+i).classList.add("open");
-  window.scrollTo(0,0);
+  // legacy (schede consigliere sostituite dai pupi) — no-op
 }
 
 function closeScheda(i) {
-  document.getElementById("scheda-"+i).classList.remove("open");
-  document.getElementById("consiglieri-grid").style.display = "grid";
+  // legacy — no-op
 }
 
 function filterMedia(cat, btn) {
@@ -1728,6 +2047,7 @@ document.addEventListener('click', function(){ closeMonitoraggio(); closeBurger(
 
 /* ===================== [6] AVVIO ===================== */
 renderConsiglieri();
+(function(){ var m=document.getElementById('scheda-modal'); if(m) m.addEventListener('click', function(e){ if(e.target===this) closeSchedaModal(); }); })();
 renderHomeNews('tutti');
 renderMediaGrid('tutti');
 renderEventi();
@@ -1746,5 +2066,71 @@ function fixGrid() {
 fixGrid();
 window.addEventListener("resize", fixGrid);
 </script>
+
+<!-- STANZA INTERROGATORIO (PUPI) -->
+<div id="interrogatorio">
+  <div id="pool"></div>
+  <div id="beam"></div>
+  <div id="lamp">
+    <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="0" x2="30" y2="18" stroke="#FFD600" stroke-width="2"/>
+      <path d="M10 42 L30 18 L50 42 Z" fill="#1a1a1a" stroke="#FFD600" stroke-width="1.5"/>
+      <ellipse cx="30" cy="43" rx="7" ry="7" fill="#FFD600" opacity=".95"/>
+      <ellipse cx="30" cy="43" rx="4" ry="4" fill="#fff" opacity=".7"/>
+    </svg>
+  </div>
+  <div id="sedia">
+    <svg width="74" height="64" viewBox="0 0 74 64" fill="none">
+      <rect x="11" y="32" width="52" height="6" rx="2" fill="#262626" stroke="#3a3a3a" stroke-width="1"/>
+      <rect x="11" y="38" width="6" height="26" rx="2" fill="#262626" stroke="#3a3a3a" stroke-width="1"/>
+      <rect x="57" y="38" width="6" height="26" rx="2" fill="#262626" stroke="#3a3a3a" stroke-width="1"/>
+      <rect x="17" y="6" width="40" height="27" rx="3" fill="#1f1f1f" stroke="#3a3a3a" stroke-width="1"/>
+    </svg>
+  </div>
+  <div id="sala-pupo"></div>
+  <div id="sala-scheda">
+    <div id="sala-scheda-nome">—</div>
+    <div id="sala-scheda-lista">—</div>
+    <div id="sala-scheda-stats">
+      <div class="sala-stat"><div class="sala-stat-num" id="ss-voti">—</div><div class="sala-stat-label">Pref.</div></div>
+      <div class="sala-stat"><div class="sala-stat-num">—</div><div class="sala-stat-label">Presenze</div></div>
+      <div class="sala-stat"><div class="sala-stat-num">—</div><div class="sala-stat-label">Interv.</div></div>
+    </div>
+    <button id="sala-scheda-btn" onclick="openSchedaModal()">Apri scheda completa →</button>
+  </div>
+  <div id="interro-bar">
+    <div id="interro-label">Sotto interrogatorio</div>
+    <div id="interro-count">—</div>
+    <button id="interro-reset" onclick="rilascia()">Rilascia ↩</button>
+  </div>
+  <div id="drop-hint">◆ Molla qui il consigliere ◆</div>
+  <div id="flash"></div>
+</div>
+
+<!-- MODALE PUPO -->
+<div id="scheda-modal">
+  <div id="scheda-box">
+    <button class="scheda-close" onclick="closeSchedaModal()">✕</button>
+    <div class="scheda-avatar-area">
+      <div class="scheda-pupo-big" id="scheda-pupo-big"></div>
+      <div class="scheda-modal-info">
+        <div id="scheda-modal-badge" class="scheda-modal-badge">—</div>
+        <div id="scheda-modal-nome" class="scheda-modal-nome">—</div>
+        <div id="scheda-modal-lista" class="scheda-modal-lista">—</div>
+        <div id="scheda-modal-voti-detail" style="font-family:var(--font-mono);font-size:12px;color:var(--gray-dark)">—</div>
+      </div>
+    </div>
+    <div class="scheda-modal-stats">
+      <div class="stat-box"><div class="stat-num">—</div><div class="stat-label">Presenze</div></div>
+      <div class="stat-box"><div class="stat-num">—</div><div class="stat-label">Interventi</div></div>
+      <div class="stat-box"><div class="stat-num" id="scheda-modal-stat-voti">—</div><div class="stat-label">Preferenze</div></div>
+    </div>
+    <div class="scheda-divider"></div>
+    <div class="scheda-section-label">Aree di interesse</div>
+    <div class="scheda-tag-list"><span class="scheda-tag">Non ancora disponibili</span></div>
+    <button class="release-btn" onclick="closeSchedaModal()">Chiudi scheda</button>
+  </div>
+</div>
+
 </body>
 </html>
